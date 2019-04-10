@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Fidelización · Mobbex {DEV}</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;El API de fidelización a diferencia de otros API requiere de 2 niveles de Claves de acceso al servicio debido a que el mismo es un servicio operado y auditado. A continuación se explica cómo generar un API Key para acceder a Mobbex y cómo obtener el Audit-Key para acceder al módulo de fidelización.&lt;/p&gt;
+"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Fidelización · Mobbex {DEV}"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mobbex.dev/"/><meta property="og:description" content="&lt;p&gt;El API de fidelización a diferencia de otros API requiere de 2 niveles de Claves de acceso al servicio debido a que el mismo es un servicio operado y auditado. A continuación se explica cómo generar un API Key para acceder a Mobbex y cómo obtener el Audit-Key para acceder al módulo de fidelización.&lt;/p&gt;
+"/><meta property="og:image" content="https://mobbex.dev/img/mobbex.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://mobbex.dev/img/mobbex.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://mobbex.dev/blog/atom.xml" title="Mobbex {DEV} Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://mobbex.dev/blog/feed.xml" title="Mobbex {DEV} Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/mobbex.png" alt="Mobbex {DEV}"/><h2 class="headerTitleWithLogo">Mobbex {DEV}</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started" target="_self">Docs</a></li><li class=""><a href="/help" target="_self">Ayuda</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="https://mobbex.com/console" target="_self">Consola</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Módulos</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Primeros Pasos</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/getting-started">Primeros Pasos</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Módulos</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/checkout">Checkout</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_orders">Ordenes de Pago</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_methods">Métodos de Pago</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_codes">Códigos de Barra o Insertados</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/loyalty">Fidelización</a></li><li class="navListItem"><a class="navItem" href="/docs/client">Cliente Desktop</a></li><li class="navListItem"><a class="navItem" href="/docs/dev_connect">Dev Connect</a></li><li class="navListItem"><a class="navItem" href="/docs/transactions">Transacciones y Consulta de Estado</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Botón Mobbex</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/mobbex_button">Crear e Insertar Botón</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Ecommerce y Librerias</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/ecommerce">E-Commerce</a></li><li class="navListItem"><a class="navItem" href="/docs/libraries">Librerias</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Otros</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/testcards">Tarjetas de Prueba</a></li><li class="navListItem"><a class="navItem" href="/docs/webhooks">Webhooks</a></li><li class="navListItem"><a class="navItem" href="/docs/statuses">Códigos de Estado y Tipos de Medio de Pago</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Fidelización</h1></header><article><div><span><p>El API de fidelización a diferencia de otros API requiere de 2 niveles de Claves de acceso al servicio debido a que el mismo es un servicio operado y auditado. A continuación se explica cómo generar un API Key para acceder a Mobbex y cómo obtener el Audit-Key para acceder al módulo de fidelización.</p>
+<h3><a class="anchor" aria-hidden="true" id="audit-key-clave-de-auditoria"></a><a href="#audit-key-clave-de-auditoria" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Audit-Key: clave de auditoria</h3>
+<p>Para crear una clave de auditoria debería generar su empresa en Mobbex, para ello luego de haber creado la cuenta en el punto anterior, dirijase a &quot;Crear Entidad&quot;, ingrese su CUIT y valide los datos. Una vez que la entidad se encuentre creada provea su CUIT a la entidad operadora para que asocie su cuenta y genere su Audit-Key. Una vez asociado a la entidad operadora podrá ver en su consola un nuevo item con su Clave de Auditoria.</p>
+<h3><a class="anchor" aria-hidden="true" id="aclaraciones-generales"></a><a href="#aclaraciones-generales" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Aclaraciones Generales</h3>
+<ul>
+<li>La carga de puntos no depende ni dependerá de los medios de pago provistos por Mobbex siendo responsabilidad del Sistema ( Entidad con Audit-Key ) la implementación de limitaciones en caso de que la implementación lo requiera.</li>
+<li>Los números de Tarjeta no poseen ningún tipo de limitaciones de caracteres aunque se recomienda que posean un número mínimo de 4 digitos por cuestiones de no colisión aunque esto será gestionado exclusivamente por el Operador autorizado al uso del servicio.</li>
+<li>La carga de puntos no es exclusiva de Entidades registradas en Mobbex pero si es exclusiva a la autorización del Operador. Los operadores deberán autorizar previamente a los CUIT que podrán sumar puntos mediante su sistema de fidelización utilizando la Consola de Mobbex.</li>
+<li>Todas las entidades autorizadas por el Operador del sistema de Fidelización podrán sumar puntos en las credenciales emitidas.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="url-del-servicio"></a><a href="#url-del-servicio" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL del Servicio</h3>
+<pre><code class="hljs">https:<span class="hljs-regexp">//m</span>obbex.com<span class="hljs-regexp">/p/</span>loyalty
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="cabeceras-headers"></a><a href="#cabeceras-headers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cabeceras (Headers)</h4>
+<ul>
+<li><strong>x-api-key</strong>: Clave API de su aplicación</li>
+<li><strong>x-audit-key</strong>: Clave de Auditoria</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="servicios"></a><a href="#servicios" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Servicios</h2>
+<h3><a class="anchor" aria-hidden="true" id="busqueda-de-cuenta"></a><a href="#busqueda-de-cuenta" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Búsqueda de Cuenta</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> POST</li>
+<li><strong><em>Url</em></strong> /accounts/search</li>
+</ul>
+<p><strong>Parámetros</strong></p>
+<ul>
+<li><code>reference</code>: Referencia a buscar, puede ser un DNI, una credencial, un email o un Nombre</li>
+</ul>
+<p><em>Importante</em> Se debe limitar la cantidad de consultas generadas al server ya que de lo contrario el IP podrá ser bloqueado.</p>
+<h3><a class="anchor" aria-hidden="true" id="creacion-de-cuenta"></a><a href="#creacion-de-cuenta" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creación de Cuenta</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> POST</li>
+<li><strong><em>Url</em></strong> /accounts/create</li>
+</ul>
+<p><strong>Parámetros</strong></p>
+<ul>
+<li><code>identification</code>: DNI del usuario.</li>
+<li><code>email</code> Email del usuario.</li>
+<li><code>credential</code> (Opcional) Número o Identificador de Credencial del usuario. Si no se provee un número de credencial el sistema creará una credencial virtual y retornará la misma.</li>
+<li><code>tax_id</code> CUIT de la Entidad que realiza la creación de la cuenta. Debe ser una Entidad válida y asociada al Operador.</li>
+<li><code>name</code> (Opcional) Nombre del usuario</li>
+<li><code>phone</code> (Opcional) Teléfono del usuario</li>
+</ul>
+<p><em>Importante</em> Los datos opcionales a pesar de ser justamente opcionales deberían ser completados siempre que sea posible.</p>
+<h3><a class="anchor" aria-hidden="true" id="balance-de-cuenta"></a><a href="#balance-de-cuenta" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Balance de Cuenta</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> POST</li>
+<li><strong><em>Url</em></strong> /accounts/balance</li>
+</ul>
+<p><strong>Parámetros</strong></p>
+<ul>
+<li><code>credential</code> Número de credencial obtenido usando la búsqueda.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="carga-de-puntos"></a><a href="#carga-de-puntos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Carga de puntos</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> POST</li>
+<li><strong><em>Url</em></strong> /points/charge</li>
+</ul>
+<p><strong>Parámetros</strong></p>
+<ul>
+<li><code>credential</code> Número de credencial obtenido usando la búsqueda.</li>
+<li><code>tax_id</code> CUIT de la Entidad que realiza la carga de Puntos. Debe ser una Entidad válida y asociada al Operador.</li>
+<li><code>points</code> Cantidad de puntos a cargar en la cuenta.</li>
+<li><code>reference</code> Referencia de la operación de carga.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="enpoints-restringidos"></a><a href="#enpoints-restringidos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Enpoints Restringidos</h3>
+<p>Las siguientes rutas requieren de permisos especiales y no podrán ser consultadas utilizando el Audit-Key.</p>
+<h3><a class="anchor" aria-hidden="true" id="transacciones"></a><a href="#transacciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Transacciones</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> POST</li>
+<li><strong><em>Url</em></strong> /transactions</li>
+</ul>
+<p><strong>Parámetros</strong></p>
+<ul>
+<li><code>credential</code> Número de credencial obtenido usando la búsqueda.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="consumo-de-puntos"></a><a href="#consumo-de-puntos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Consumo de puntos</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> POST</li>
+<li><strong><em>Url</em></strong> /points/discharge</li>
+</ul>
+<p><strong>Parámetros</strong></p>
+<ul>
+<li><code>credential</code> Número de credencial obtenido usando la búsqueda.</li>
+<li><code>points</code> Cantidad de puntos a consumir en la cuenta.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="webhooks"></a><a href="#webhooks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>WebHooks</h2>
+<p>Los WebHooks son URLs seguras mediante las cual Mobbex notificará los diferentes eventos relacionados con el módulo de Fidelización.</p>
+<blockquote>
+<p>Para configurar un WebHook debe hacerlo desde la consola de Mobbex en la sección Fidelización, Configuración. El WebHook debe ser HTTPS (TLS 1.2 o Superior) y debe poder recibir datos mediante el método POST de HTTP.</p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="tipos"></a><a href="#tipos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tipos</h3>
+<ul>
+<li>Nueva Credencial</li>
+<li>Nueva Operación</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="nueva-credencial"></a><a href="#nueva-credencial" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nueva Credencial</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> POST</li>
+<li><strong><em>Formato</em></strong> JSON</li>
+</ul>
+<pre><code class="hljs css language-js">{
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"LOYALTY_CREDENTIAL"</span>,
+    <span class="hljs-string">"data"</span>: {
+        <span class="hljs-string">"uid"</span>: <span class="hljs-string">"r18WGnQmm"</span>,
+        <span class="hljs-string">"credential"</span>: <span class="hljs-string">"a1b2c3d4"</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Juan Perez"</span>,
+        <span class="hljs-string">"identification"</span>: <span class="hljs-string">"12123123"</span>,
+        <span class="hljs-string">"email"</span>: <span class="hljs-string">"juanperez@email.com"</span>
+    }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="nueva-operacion"></a><a href="#nueva-operacion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nueva Operación</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> POST</li>
+<li><strong><em>Formato</em></strong> JSON</li>
+</ul>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"LOYALTY_TRANSACTION"</span>,
+    <span class="hljs-attr">"data"</span>: {
+        <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"view"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>
+        },
+        <span class="hljs-attr">"payment"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"rkWpX3YU6x"</span>,
+            <span class="hljs-attr">"status"</span>: {
+                <span class="hljs-attr">"code"</span>: <span class="hljs-string">"200"</span>,
+                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Paid"</span>,
+                <span class="hljs-attr">"message"</span>: <span class="hljs-string">"APROBADA"</span>
+            },
+            <span class="hljs-attr">"total"</span>: <span class="hljs-number">10</span>,
+            <span class="hljs-attr">"currency"</span>: {
+                <span class="hljs-attr">"code"</span>: <span class="hljs-string">"ARS"</span>,
+                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Peso Argentino"</span>
+            },
+            <span class="hljs-attr">"currency_data"</span>: {
+                <span class="hljs-attr">"value"</span>: <span class="hljs-string">"PTS"</span>,
+                <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Puntos"</span>,
+                <span class="hljs-attr">"symbol"</span>: <span class="hljs-string">"$P"</span>
+            },
+            <span class="hljs-attr">"source"</span>: {
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Puntos"</span>,
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>,
+                <span class="hljs-attr">"number"</span>: <span class="hljs-string">"XXXXXXXXXXXX"</span>
+            },
+            <span class="hljs-attr">"user"</span>: {
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Perez"</span>,
+                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"juanperez@mobbex.com"</span>
+            },
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"HyjdiK8Tx"</span>
+        }
+    }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/payment_codes"><span class="arrow-prev">← </span><span>Códigos de Barra o Insertados</span></a><a class="docs-next button" href="/docs/client"><span>Cliente Desktop</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#servicios">Servicios</a><ul class="toc-headings"><li><a href="#busqueda-de-cuenta">Búsqueda de Cuenta</a></li><li><a href="#creacion-de-cuenta">Creación de Cuenta</a></li><li><a href="#balance-de-cuenta">Balance de Cuenta</a></li><li><a href="#carga-de-puntos">Carga de puntos</a></li><li><a href="#enpoints-restringidos">Enpoints Restringidos</a></li><li><a href="#transacciones">Transacciones</a></li><li><a href="#consumo-de-puntos">Consumo de puntos</a></li></ul></li><li><a href="#webhooks">WebHooks</a><ul class="toc-headings"><li><a href="#tipos">Tipos</a></li><li><a href="#nueva-credencial">Nueva Credencial</a></li><li><a href="#nueva-operacion">Nueva Operación</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/mobbex.png" alt="Mobbex {DEV}" width="58" height="52"/></a><div><h5>Documentación</h5><a href="/docs/en/getting-started">Comenzá ahora</a><a href="/docs/en/checkout">Checkout</a><a href="/docs/en/payment_orders">Ordenes de Pago</a><a href="/docs/en/mobbex_button">Botón Mobbex</a><a href="/docs/en/ecommerce">Plugins para Ecommerce</a></div><div><h5>Sobre Mobbex</h5><a href="https://mobbex.com/console" target="_blank" rel="noreferrer noopener">Usuarios y Registro</a><a href="https://www.mobbex.com/comoseusa/" target="_blank" rel="noreferrer noopener">Cómo se usa?</a><a href="https://www.mobbex.com/contactanos/" target="_blank" rel="noreferrer noopener">Contactanos</a><a href="https://twitter.com/mobbex" target="_blank" rel="noreferrer noopener">Encontranos en Twitter</a></div><div><h5>Más</h5><a href="/blog">Blog</a><a href="https://github.com/mobbexco">GitHub</a></div></section><a href="https://www.mobbex.com" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Mobbex Argentina SRL</section></footer></div><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script></body></html>

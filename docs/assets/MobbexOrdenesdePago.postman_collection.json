@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "126a998e-834d-479b-b97b-9e2122250c85",
+		"name": "Mobbex Ordenes de Pago",
+		"description": "APIs para generar Ordenes de Pago",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Orden de Pago con Webhook",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj",
+						"description": "API Key Privada"
+					},
+					{
+						"key": "x-access-token",
+						"value": "d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
+						"description": "Token de Acceso al Comercio"
+					},
+					{
+						"key": "x-lang",
+						"value": "es",
+						"description": "Idioma de la respuesta: es, en",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"total\":100,\n\t\"email\":\"admin@mobbex.com\",\n\t\"description\":\"Some Description\",\n\t\"return_url\":\"https://mobbex.com/finished\",\n\t\"webhook\":\"https://mobbex.com/webhook\",\n\t\"reference\": \"mi_referencia_123\"\n}"
+				},
+				"url": {
+					"raw": "https://api.mobbex.com/p/payment_order",
+					"protocol": "https",
+					"host": [
+						"api",
+						"mobbex",
+						"com"
+					],
+					"path": [
+						"p",
+						"payment_order"
+					]
+				},
+				"description": "Creación de Órden de Pago simple"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Orden de Pago via SMS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"description": "API Key Privada",
+						"key": "x-api-key",
+						"value": "zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj"
+					},
+					{
+						"description": "Token de Acceso al Comercio",
+						"key": "x-access-token",
+						"value": "d31f0721-2f85-44e7-bcc6-15e19d1a53cc"
+					},
+					{
+						"description": "Idioma de la respuesta: es, en",
+						"key": "x-lang",
+						"type": "text",
+						"value": "es"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"total\":100,\n\t\"phone\":\"3516276390\",\n\t\"description\":\"Orden de Pago SMS\",\n\t\"return_url\":\"https://mobbex.com/finished\",\n\t\"webhook\":\"https://mobbex.com/webhook\",\n\t\"reference\": \"mi_referencia_123\"\n}"
+				},
+				"url": {
+					"raw": "https://api.mobbex.com/p/payment_order",
+					"protocol": "https",
+					"host": [
+						"api",
+						"mobbex",
+						"com"
+					],
+					"path": [
+						"p",
+						"payment_order"
+					]
+				},
+				"description": "Creación de Órden de Pago simple"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Orden Con 1 Vencimiento",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj",
+						"description": "API Key Privada"
+					},
+					{
+						"key": "x-access-token",
+						"value": "d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
+						"description": "Token de Acceso al Comercio"
+					},
+					{
+						"key": "x-lang",
+						"value": "es",
+						"description": "Idioma de la respuesta: es, en",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"total\":100,\n\t\"description\":\"Orden de Pago con 1 Vencimiento\",\n\t\"due\": {\n\t\t\"day\": 25,\n\t\t\"month\": 12,\n\t\t\"year\": 19\n\t},\n\t\"reference\": \"mi_referencia_123\"\n}"
+				},
+				"url": {
+					"raw": "https://api.mobbex.com/p/payment_order",
+					"protocol": "https",
+					"host": [
+						"api",
+						"mobbex",
+						"com"
+					],
+					"path": [
+						"p",
+						"payment_order"
+					]
+				},
+				"description": "Creación de Órden de Pago simple"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Orden Con 2 Vencimientos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj",
+						"description": "API Key Privada"
+					},
+					{
+						"key": "x-access-token",
+						"value": "d31f0721-2f85-44e7-bcc6-15e19d1a53cc",
+						"description": "Token de Acceso al Comercio"
+					},
+					{
+						"key": "x-lang",
+						"value": "es",
+						"description": "Idioma de la respuesta: es, en",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"total\":100,\n\t\"description\":\"Some Description #3\",\n\t\"due\": {\n\t\t\"day\": 15,\n\t\t\"month\": 12,\n\t\t\"year\": 19\n\t},\n\t\"secondDue\": {\n\t\t\"days\": 10,\n\t\t\"surcharge\": 50\n\t},\n\t\"reference\": \"mi_referencia_123\"\n}"
+				},
+				"url": {
+					"raw": "https://next.mobbex.com/p/payment_order",
+					"protocol": "https",
+					"host": [
+						"next",
+						"mobbex",
+						"com"
+					],
+					"path": [
+						"p",
+						"payment_order"
+					]
+				},
+				"description": "Creación de Órden de Pago simple"
+			},
+			"response": []
+		}
+	]
+}

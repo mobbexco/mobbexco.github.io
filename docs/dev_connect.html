@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Dev Connect · Mobbex {DEV}</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;El API de Dev Connect permite a las aplicaciones generar el Access Token requerido para acceder a los servicios de los Comercios administrados de manera rápida y simple para los comercios.&lt;/p&gt;
+"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Dev Connect · Mobbex {DEV}"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mobbex.dev/"/><meta property="og:description" content="&lt;p&gt;El API de Dev Connect permite a las aplicaciones generar el Access Token requerido para acceder a los servicios de los Comercios administrados de manera rápida y simple para los comercios.&lt;/p&gt;
+"/><meta property="og:image" content="https://mobbex.dev/img/mobbex.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://mobbex.dev/img/mobbex.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://mobbex.dev/blog/atom.xml" title="Mobbex {DEV} Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://mobbex.dev/blog/feed.xml" title="Mobbex {DEV} Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/mobbex.png" alt="Mobbex {DEV}"/><h2 class="headerTitleWithLogo">Mobbex {DEV}</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started" target="_self">Docs</a></li><li class=""><a href="/help" target="_self">Ayuda</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><li class=""><a href="https://mobbex.com/console" target="_self">Consola</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Módulos</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Primeros Pasos</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/getting-started">Primeros Pasos</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Módulos</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/checkout">Checkout</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_orders">Ordenes de Pago</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_methods">Métodos de Pago</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_codes">Códigos de Barra o Insertados</a></li><li class="navListItem"><a class="navItem" href="/docs/loyalty">Fidelización</a></li><li class="navListItem"><a class="navItem" href="/docs/client">Cliente Desktop</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/dev_connect">Dev Connect</a></li><li class="navListItem"><a class="navItem" href="/docs/transactions">Transacciones y Consulta de Estado</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Botón Mobbex</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/mobbex_button">Crear e Insertar Botón</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Ecommerce y Librerias</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/ecommerce">E-Commerce</a></li><li class="navListItem"><a class="navItem" href="/docs/libraries">Librerias</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Otros</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/testcards">Tarjetas de Prueba</a></li><li class="navListItem"><a class="navItem" href="/docs/webhooks">Webhooks</a></li><li class="navListItem"><a class="navItem" href="/docs/statuses">Códigos de Estado y Tipos de Medio de Pago</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Dev Connect</h1></header><article><div><span><p>El API de Dev Connect permite a las aplicaciones generar el Access Token requerido para acceder a los servicios de los Comercios administrados de manera rápida y simple para los comercios.</p>
+<h4><a class="anchor" aria-hidden="true" id="url-del-servicio"></a><a href="#url-del-servicio" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL del Servicio</h4>
+<pre><code class="hljs"><span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/mobbex.com/p</span><span class="hljs-regexp">/developer/connect</span>
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="cabeceras-headers"></a><a href="#cabeceras-headers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cabeceras (Headers)</h4>
+<ul>
+<li><strong><em>x-api-key</em></strong>: Clave API de su aplicación</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="servicios"></a><a href="#servicios" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Servicios</h2>
+<h3><a class="anchor" aria-hidden="true" id="creacion-de-solicitud"></a><a href="#creacion-de-solicitud" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creación de Solicitud</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> POST</li>
+<li><strong><em>Url</em></strong> /</li>
+</ul>
+<p><strong>Parámetros</strong></p>
+<ul>
+<li><code>return_url</code>: URL a la cual Mobbex deberá redireccionar al usuario al finalizar el proceso.</li>
+<li></li>
+</ul>
+<p><strong>Respuesta</strong></p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"data"</span>: {
+        <span class="hljs-attr">"id"</span>: <span class="hljs-string">"oZWpdzX7y"</span>,
+        <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://mobbex.com/p/developer/connect/oZWpdzX7y"</span>
+    }
+}
+</code></pre>
+<p><em>Importante</em> Redireccionar al usuario a la URL devuelta en data para la conexión. Si el resultado es positivo el usuario será redireccionado a la url declarada en &quot;return_url&quot; agregando el parametro &quot;connectStatus&quot; en &quot;done&quot;. Si el resultado es negativo será reenviado a la misma url con el status &quot;cancelled&quot;. Si el status es Done se debe llamar a la siguiente URL para solicitar las credenciales.</p>
+<h3><a class="anchor" aria-hidden="true" id="obtencion-de-credenciales"></a><a href="#obtencion-de-credenciales" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Obtención de Credenciales</h3>
+<ul>
+<li><strong><em>Tipo</em></strong> GET</li>
+<li><strong><em>Url</em></strong> /{Connect ID}/credentials</li>
+</ul>
+<p><strong>Parámetros</strong></p>
+<ul>
+<li><code>Connect ID</code>: ID Retornado en la solicitud</li>
+</ul>
+<p><strong>Respuesta</strong></p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"data"</span>: {
+        <span class="hljs-attr">"connectId"</span>: <span class="hljs-string">"oZWpdzX7y"</span>,
+        <span class="hljs-attr">"access_token"</span>: <span class="hljs-string">"XXXXXX-XXXXXXXXXX-XXXXXXXXXX-XXXXXXXXX"</span>,
+        <span class="hljs-attr">"entity"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Comercio de Prueba"</span>,
+            <span class="hljs-attr">"logo"</span>: {
+                <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"comercio_de_prueba.png"</span>,
+                <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3.amazonaws.com/mobbex/files/images/comercio_de_prueba.png"</span>,
+                <span class="hljs-attr">"mimetype"</span>: <span class="hljs-string">"image/png"</span>,
+                <span class="hljs-attr">"extension"</span>: <span class="hljs-string">"png"</span>,
+                <span class="hljs-attr">"size"</span>: <span class="hljs-number">4472</span>,
+                <span class="hljs-attr">"width"</span>: <span class="hljs-number">250</span>,
+                <span class="hljs-attr">"height"</span>: <span class="hljs-number">250</span>,
+                <span class="hljs-attr">"sizes"</span>: [
+                    <span class="hljs-string">"medium"</span>,
+                    <span class="hljs-string">"small"</span>,
+                    <span class="hljs-string">"square"</span>
+                ],
+                <span class="hljs-attr">"versions"</span>: [
+                    <span class="hljs-string">"https://s3.amazonaws.com/mobbex/files/images/comercio_de_prueba-medium.png"</span>,
+                    <span class="hljs-string">"https://s3.amazonaws.com/mobbex/files/images/comercio_de_prueba-small.png"</span>,
+                    <span class="hljs-string">"https://s3.amazonaws.com/mobbex/files/images/comercio_de_prueba-square.png"</span>
+                ],
+                <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2017-12-01T10:20:17.000Z"</span>
+            },
+            <span class="hljs-attr">"tax_id"</span>: <span class="hljs-string">"27121231230"</span>
+        }
+    }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/client"><span class="arrow-prev">← </span><span>Cliente Desktop</span></a><a class="docs-next button" href="/docs/transactions"><span>Transacciones y Consulta de Estado</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#servicios">Servicios</a><ul class="toc-headings"><li><a href="#creacion-de-solicitud">Creación de Solicitud</a></li><li><a href="#obtencion-de-credenciales">Obtención de Credenciales</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/mobbex.png" alt="Mobbex {DEV}" width="58" height="52"/></a><div><h5>Documentación</h5><a href="/docs/en/getting-started">Comenzá ahora</a><a href="/docs/en/checkout">Checkout</a><a href="/docs/en/payment_orders">Ordenes de Pago</a><a href="/docs/en/mobbex_button">Botón Mobbex</a><a href="/docs/en/ecommerce">Plugins para Ecommerce</a></div><div><h5>Sobre Mobbex</h5><a href="https://mobbex.com/console" target="_blank" rel="noreferrer noopener">Usuarios y Registro</a><a href="https://www.mobbex.com/comoseusa/" target="_blank" rel="noreferrer noopener">Cómo se usa?</a><a href="https://www.mobbex.com/contactanos/" target="_blank" rel="noreferrer noopener">Contactanos</a><a href="https://twitter.com/mobbex" target="_blank" rel="noreferrer noopener">Encontranos en Twitter</a></div><div><h5>Más</h5><a href="/blog">Blog</a><a href="https://github.com/mobbexco">GitHub</a></div></section><a href="https://www.mobbex.com" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Mobbex Argentina SRL</section></footer></div><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script></body></html>
