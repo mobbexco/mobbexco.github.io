@@ -189,6 +189,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Checkout: Modalidad Split",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"type": "text",
+						"value": "zJ8LFTBX6Ba8D611e9io13fDZAwj0QmKO1Hn1yIj"
+					},
+					{
+						"key": "x-access-token",
+						"type": "text",
+						"value": "d31f0721-2f85-44e7-bcc6-15e19d1a53cc"
+					},
+					{
+						"key": "x-lang",
+						"type": "text",
+						"value": "es"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"total\": 1000,\n\t\"currency\": \"ars\",\n\t\"reference\": \"2982-2XtPXlgSaWccqUyobuv4sEmLYMV0N6oX6MoridMw\",\n\t\"description\": \"Venta con División de Pago\",\n\t\"return_url\": \"https://mobbex.com/sale/return?session=56789\",\n\t\"webhook\": \"https://mobbex.com/sale/webhook?user=1234\",\n\t\"split\": [{\n\t\t\"tax_id\": \"30999999990\",\n\t\t\"total\": 1000,\n\t\t\"reference\": \"pay123\",\n\t\t\"fee\": 200\n\t}]\n}"
+				},
+				"url": {
+					"raw": "https://api.mobbex.com/p/checkout",
+					"protocol": "https",
+					"host": [
+						"api",
+						"mobbex",
+						"com"
+					],
+					"path": [
+						"p",
+						"checkout"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

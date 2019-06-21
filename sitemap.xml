@@ -16,6 +16,7 @@
 <url> <loc>https://mobbex.dev/docs/payment_methods</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/payment_methods" /> </url>
 <url> <loc>https://mobbex.dev/docs/payment_orders</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/payment_orders" /> </url>
 <url> <loc>https://mobbex.dev/docs/statuses</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/statuses" /> </url>
+<url> <loc>https://mobbex.dev/docs/subscriptions</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/subscriptions" /> </url>
 <url> <loc>https://mobbex.dev/docs/testcards</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/testcards" /> </url>
 <url> <loc>https://mobbex.dev/docs/transactions</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/transactions" /> </url>
 <url> <loc>https://mobbex.dev/docs/webhooks</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/webhooks" /> </url>
