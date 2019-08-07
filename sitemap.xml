@@ -6,6 +6,7 @@
 <url> <loc>https://mobbex.dev/blog/2019/04/09/upd-M4W2.19</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://mobbex.dev/docs/checkout</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/checkout" /> </url>
 <url> <loc>https://mobbex.dev/docs/client</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/client" /> </url>
+<url> <loc>https://mobbex.dev/docs/currency</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/currency" /> </url>
 <url> <loc>https://mobbex.dev/docs/dev_connect</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/dev_connect" /> </url>
 <url> <loc>https://mobbex.dev/docs/ecommerce</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/ecommerce" /> </url>
 <url> <loc>https://mobbex.dev/docs/getting-started</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://mobbex.dev/docs/getting-started" /> </url>
