@@ -76,6 +76,7 @@
 <ul>
 <li><strong>webhook</strong>: (FQDN compatible con POST) URL que será invocada por Mobbex al finalizar la operación mediante <strong>POST</strong> y que recibirá todos los detalles sobre la operación procesada. El Webhook será invocado antes de realizarse la redirección. Tenga en cuenta que la URL utilizada debe ser capaz de recibir una llamada de Tipo POST de lo contrario Mobbex no será capaz de informarle sobre la misma.</li>
 <li><strong>redirect</strong>: (Boolean: true/false) permite la redirección automática al checkout al terminar la ejecución del POST sin intervención del usuario. (Por defecto es falso y siempre retorna la URL</li>
+<li><strong>test</strong>; (Boolean: true/false) permite colocar el ambiente en modo desarrollo.</li>
 <li><strong>items</strong>: Elementos que serán mostrados en el checkout como parte de la descripción del pago. Las imágenes deben soportar HTTPS, de lo contrario no serán mostradas.</li>
 </ul>
 <pre><code class="hljs css language-json">{
