@@ -63,70 +63,63 @@
 <p>Cuando crea un checkout mediante el API de Mobbex usted puede definir una url capaz de recibir una llamada HTTP POST mediante la cual se le va a notificar los cambios en el estado de la transacción específica.</p>
 <h3><a class="anchor" aria-hidden="true" id="ejemplo-de-contenido-enviado-en-un-webhook"></a><a href="#ejemplo-de-contenido-enviado-en-un-webhook" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ejemplo de Contenido enviado en un WebHook</h3>
 <p>Headers:
-<code>Content-Type</code>: <code>application/json</code></p>
+<code>Content-Type</code>: <code>application/x-www-form-urlencoded</code></p>
 <h4><a class="anchor" aria-hidden="true" id="contenido"></a><a href="#contenido" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Contenido:</h4>
-<pre><code class="hljs css language-code"><span class="hljs-string">lang:</span> <span class="hljs-string">'json'</span>
-<span class="hljs-string">raw:</span> <span class="hljs-literal">false</span>
----
-{
-    <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://myapp.com/webhooks"</span>,
-    <span class="hljs-string">"method"</span>: <span class="hljs-string">"POST"</span>,
-    <span class="hljs-string">"form"</span>: {
-        <span class="hljs-string">"type"</span>: <span class="hljs-string">"payment"</span>,
-        <span class="hljs-string">"data"</span>: {
-            <span class="hljs-string">"result"</span>: <span class="hljs-literal">true</span>,
-            <span class="hljs-string">"view"</span>: {
-                <span class="hljs-string">"type"</span>: <span class="hljs-string">"card"</span>,
-                <span class="hljs-string">"options"</span>: {
-                    <span class="hljs-string">"data"</span>: [
-                        {
-                            <span class="hljs-string">"label"</span>: <span class="hljs-string">"Orden Nro."</span>,
-                            <span class="hljs-string">"value"</span>: <span class="hljs-string">"rkWpX3YU6x"</span>
-                        },
-                        {
-                            <span class="hljs-string">"label"</span>: <span class="hljs-string">"Identificador de transacción"</span>,
-                            <span class="hljs-string">"value"</span>: <span class="hljs-string">"73198584"</span>
-                        }
-                    ]
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"payment"</span>,
+    <span class="hljs-attr">"data"</span>: {
+        <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"view"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>,
+            <span class="hljs-attr">"options"</span>: {
+                <span class="hljs-attr">"data"</span>: [
+                    {
+                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Orden Nro."</span>,
+                        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"rkWpX3YU6x"</span>
+                    },
+                    {
+                        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Identificador de transacción"</span>,
+                        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"73198584"</span>
+                    }
+                ]
+            }
+        },
+        <span class="hljs-attr">"payment"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"rkWpX3YU6x"</span>,
+            <span class="hljs-attr">"operation"</span>: {
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"payment"</span>
+            },
+            <span class="hljs-attr">"status"</span>: {
+                <span class="hljs-attr">"code"</span>: <span class="hljs-string">"200"</span>,
+                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Paid"</span>,
+                <span class="hljs-attr">"message"</span>: <span class="hljs-string">"APROBADA - Autorizada"</span>
+            },
+            <span class="hljs-attr">"total"</span>: <span class="hljs-number">1907.5</span>,
+            <span class="hljs-attr">"currency"</span>: {
+                <span class="hljs-attr">"code"</span>: <span class="hljs-string">"ARS"</span>,
+                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Peso Argentino"</span>
+            },
+            <span class="hljs-attr">"currency_data"</span>: {
+                <span class="hljs-attr">"value"</span>: <span class="hljs-string">"ARS"</span>,
+                <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Peso Argentino"</span>,
+                <span class="hljs-attr">"symbol"</span>: <span class="hljs-string">"$"</span>,
+                <span class="hljs-attr">"hidden"</span>: <span class="hljs-literal">false</span>
+            },
+            <span class="hljs-attr">"source"</span>: {
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Visa"</span>,
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>,
+                <span class="hljs-attr">"number"</span>: <span class="hljs-string">"454642xxxxxx7787"</span>,
+                <span class="hljs-attr">"installment"</span>: {
+                    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"3 Cuotas"</span>,
+                    <span class="hljs-attr">"amount"</span>: <span class="hljs-number">635.83</span>,
+                    <span class="hljs-attr">"count"</span>: <span class="hljs-number">3</span>
                 }
             },
-            <span class="hljs-string">"payment"</span>: {
-                <span class="hljs-string">"id"</span>: <span class="hljs-string">"rkWpX3YU6x"</span>,
-                <span class="hljs-string">"operation"</span>: {
-                    <span class="hljs-string">"type"</span>: <span class="hljs-string">"payment"</span>
-                },
-                <span class="hljs-string">"status"</span>: {
-                    <span class="hljs-string">"code"</span>: <span class="hljs-string">"200"</span>,
-                    <span class="hljs-string">"text"</span>: <span class="hljs-string">"Paid"</span>,
-                    <span class="hljs-string">"message"</span>: <span class="hljs-string">"APROBADA - Autorizada"</span>
-                },
-                <span class="hljs-string">"total"</span>: <span class="hljs-number">1907.5</span>,
-                <span class="hljs-string">"currency"</span>: {
-                    <span class="hljs-string">"code"</span>: <span class="hljs-string">"ARS"</span>,
-                    <span class="hljs-string">"text"</span>: <span class="hljs-string">"Peso Argentino"</span>
-                },
-                <span class="hljs-string">"currency_data"</span>: {
-                    <span class="hljs-string">"value"</span>: <span class="hljs-string">"ARS"</span>,
-                    <span class="hljs-string">"label"</span>: <span class="hljs-string">"Peso Argentino"</span>,
-                    <span class="hljs-string">"symbol"</span>: <span class="hljs-string">"$"</span>,
-                    <span class="hljs-string">"hidden"</span>: <span class="hljs-literal">false</span>
-                },
-                <span class="hljs-string">"source"</span>: {
-                    <span class="hljs-string">"name"</span>: <span class="hljs-string">"Visa"</span>,
-                    <span class="hljs-string">"type"</span>: <span class="hljs-string">"card"</span>,
-                    <span class="hljs-string">"number"</span>: <span class="hljs-string">"454642xxxxxx7787"</span>,
-                    <span class="hljs-string">"installment"</span>: {
-                        <span class="hljs-string">"description"</span>: <span class="hljs-string">"3 Cuotas"</span>,
-                        <span class="hljs-string">"amount"</span>: <span class="hljs-number">635.83</span>,
-                        <span class="hljs-string">"count"</span>: <span class="hljs-number">3</span>
-                    }
-                },
-                <span class="hljs-string">"user"</span>: {
-                    <span class="hljs-string">"name"</span>: <span class="hljs-string">"Juan Perez"</span>,
-                    <span class="hljs-string">"email"</span>: <span class="hljs-string">"juanperez@mobbex.com"</span>
-                },
-                <span class="hljs-string">"reference"</span>: <span class="hljs-string">"HyjdiK8Tx"</span>
-            }
+            <span class="hljs-attr">"user"</span>: {
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Perez"</span>,
+                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"juanperez@mobbex.com"</span>
+            },
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"HyjdiK8Tx"</span>
         }
     }
 }
