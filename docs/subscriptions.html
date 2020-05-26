@@ -76,12 +76,13 @@
 <p><em>Requeridos</em></p>
 <ul>
 <li><code>total</code>: Monto de la operación. Formato XXX.xx donde el <strong><em>PUNTO</em></strong> es el separador decimal.</li>
-<li><code>currency</code>: Moneda de la operación.</li>
+<li><code>currency</code>: Moneda de la operación. Sólo admite ARS.</li>
 <li><code>type</code>: Valores posibles: dynamic o manual. Las suscripciones de tipo manual deberán procesarse externamente llamando al servicio, no se tendrá en cuenta intervalo en este tipo.</li>
 <li><code>name</code>: Nombre de la suscripción.</li>
 <li><code>description</code>: Descripción de la operación que será mostrada en el Checkout.</li>
-<li><code>interval</code>: Intervalo de Cobro de la suscripción. Sólo puede editarse si la suscripción no posee suscriptores, de lo contrario arroja error.</li>
-<li><code>trial</code>: Cantidadd de Periodos de Prueba.</li>
+<li><code>interval</code>: Intervalo de Cobro de la suscripción. Sólo puede editarse si la suscripción no posee suscriptores, de lo contrario arroja error. Valores Admitidos: 7d, 15d, 1m, 2m, 3m, 6m, 1y. Donde &quot;d&quot; es Dias, &quot;m&quot; es Meses y &quot;y&quot; es Años. Este parámetro NO aplica a suscripciones manuales.</li>
+<li><code>trial</code>: Cantidadd de Periodos de Prueba. Sólo para suscriciones dinámicas.</li>
+<li><code>limit</code>: Cantidad de Periodos que se ejecutarán. Colocar 0 para anular los periodos y cobrar ilimitadamente. Colocar un número mayor a 0 para limitar los periodos. Este número siempre debe ser un entero.</li>
 <li><code>webhook</code>: URL en la que se recibirán las notificaciones via POST. Debe ser HTTPs.</li>
 <li><code>return_url</code>: URL a la que se enviará al usuario una vez suscripto. Debe ser HTTPs.</li>
 </ul>
