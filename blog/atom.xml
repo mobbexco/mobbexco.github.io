@@ -2,8 +2,8 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://mobbex.dev/blog</id>
     <title>Mobbex {DEV} Blog</title>
-    <updated>2019-04-09T06:00:00Z</updated>
-    <generator>Feed for Node.js</generator>
+    <updated>2019-04-09T06:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://mobbex.dev/blog"/>
     <subtitle>The best place to stay up-to-date with the latest Mobbex {DEV} news and events.</subtitle>
     <logo>https://mobbex.dev/img/mobbex.png</logo>
@@ -11,9 +11,8 @@
     <entry>
         <title type="html"><![CDATA[Cambios M4W2.19]]></title>
         <id>https://mobbex.dev/blog/2019/04/09/upd-M4W2.19.html</id>
-        <link href="https://mobbex.dev/blog/2019/04/09/upd-M4W2.19.html">
-        </link>
-        <updated>2019-04-09T06:00:00Z</updated>
+        <link href="https://mobbex.dev/blog/2019/04/09/upd-M4W2.19.html"/>
+        <updated>2019-04-09T06:00:00.000Z</updated>
         <summary type="html"><![CDATA[<blockquote> <p>Cambios introducidos durante la Semana 2 de Abril 2019.</p> </blockquote> <p>Cambios M4W2.1.19</p> <ul> <li>Mejoras y Correcciones generales. Optimización de UI.</li> <li>Actualización de librerias.</li> <li>Ahora si el usuario tiene sólo un Comercio el servicio ingresa directo al comercio.</li> <li>Se bloq...</li></ul>]]></summary>
         <author>
             <name>Mobbex Devs</name>
