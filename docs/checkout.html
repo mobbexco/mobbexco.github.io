@@ -78,6 +78,11 @@
 <li><strong>redirect</strong>: (Boolean: true/false. OBSOLETO) permite la redirección automática al checkout al terminar la ejecución del POST sin intervención del usuario. (Por defecto es falso y siempre retorna la URL). Este parámetro es obsoleto y próximamente será eliminado.</li>
 <li><strong>test</strong>: (Boolean: true/false) permite colocar el ambiente en modo desarrollo.</li>
 <li><strong>timeout</strong>: Tiempo de Vida del Checkout creado en Minutos. Por defecto será de 60 minutos.</li>
+<li><strong>intent</strong>: Cinemática de Pago:
+<ul>
+<li>Pago Normal: payment.v2</li>
+<li>2 Pasos: payment.2-step</li>
+</ul></li>
 <li><strong>items</strong>: Elementos que serán mostrados en el checkout como parte de la descripción del pago. Las imágenes deben soportar HTTPS, de lo contrario no serán mostradas.</li>
 </ul>
 <pre><code class="hljs css language-json">{
