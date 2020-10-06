@@ -85,7 +85,12 @@
 <li><code>limit</code>: Cantidad de Periodos que se ejecutarán. Colocar 0 para anular los periodos y cobrar ilimitadamente. Colocar un número mayor a 0 para limitar los periodos. Este número siempre debe ser un entero.</li>
 <li><code>webhook</code>: URL en la que se recibirán las notificaciones via POST. Debe ser HTTPs.</li>
 <li><code>return_url</code>: URL a la que se enviará al usuario una vez suscripto. Debe ser HTTPs.</li>
-<li><code>features</code>: Permite activar o desactivar características internas de Suscripciones. Este campo debe enviarse como array y es opcional. Opciones: &quot;validate_id&quot;, &quot;accept_no_funds&quot;. Ej: <code>&quot;features&quot;: [&quot;accept_no_funds&quot;, &quot;validate_id&quot;]</code>. Validate ID controlará el DNI del suscriptor contra el Tarjeta-Habiente rechazando la operación en caso de no coincidir. Accept No Funds aceptará los casos donde la tarjeta no posea fondos como un caso válido de tokenización.</li>
+<li><code>features</code>: Permite activar o desactivar características internas de Suscripciones. Este campo debe enviarse como array y es opcional. Ej: <code>&quot;features&quot;: [&quot;accept_no_funds&quot;, &quot;validate_id&quot;]</code>. Opciones:
+<ul>
+<li><code>validate_id</code>: Validate ID controlará el DNI del suscriptor contra el Tarjeta-Habiente rechazando la operación en caso de no coincidir.</li>
+<li><code>accept_no_funds</code>: Accept No Funds aceptará los casos donde la tarjeta no posea fondos como un caso válido de tokenización.</li>
+<li><code>no_email</code>: Desactivará los emails de aviso al Suscriptor pero no los emails de aviso al comercio.</li>
+</ul></li>
 <li><code>sources</code>: El checkout permite la limitación de los medios de pago aceptados. Para realizar dicha limitación se debe enviar un array de medios a aceptar. Ej.</li>
 </ul>
 <pre><code class="hljs css language-json">{
