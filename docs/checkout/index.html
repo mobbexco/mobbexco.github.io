@@ -120,6 +120,7 @@
     <span class="hljs-attr">"installments"</span>: [<span class="hljs-string">"-ahora_12"</span>, <span class="hljs-string">"-ahora_18"</span>]
 }
 </code></pre>
+<p>Para conocer las opciones disponibles de medios de pago <code>sources</code> y planes <code>installments</code> ver <a href="/docs/payment_methods">Métodos de pago y cuotas</a></p>
 <blockquote>
 <p>Para el caso especial de los Planes Ahora ( Argentina ) las referencias siempre serán fijas:</p>
 <ul>
@@ -130,7 +131,7 @@
 </ul>
 </blockquote>
 <ul>
-<li><strong>cutomer</strong>: Objecto con los datos del Cliente.</li>
+<li><strong>customer</strong>: Objecto con los datos del Cliente.</li>
 <li><strong>customer.email</strong>: Email del Cliente. Este parametro es Necesario.</li>
 <li><strong>customer.identification</strong>: DNI del Cliente</li>
 <li><strong>customer.name</strong>: Nombre del Cliente</li>
@@ -180,15 +181,15 @@
     <span class="hljs-string">"theme"</span>: {
       <span class="hljs-string">"type"</span>: <span class="hljs-string">"light"</span>,
       <span class="hljs-string">"background"</span>: <span class="hljs-string">"#0000FF"</span>,
-      <span class="hljs-string">"showHeader"</span>: <span class="hljs-literal">false</span>,
-            <span class="hljs-string">"header"</span>: {
-                <span class="hljs-string">"name"</span>: <span class="hljs-string">"Pepito el pistolero"</span>,
-                <span class="hljs-string">"logo"</span>: <span class="hljs-string">"https://res.mobbex.com/images/icons/def_store.png"</span>
-            },
-            <span class="hljs-string">"colors"</span>: {
-                <span class="hljs-string">"primary"</span>: <span class="hljs-string">"#FF0000"</span>
-            }
-        }
+      <span class="hljs-string">"showHeader"</span>: <span class="hljs-literal">false</span>,  <span class="hljs-comment">// Si se oculta la cabecera con esta propiedad, no definir "header"</span>
+      <span class="hljs-string">"header"</span>: {
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Pepito el pistolero"</span>,
+        <span class="hljs-string">"logo"</span>: <span class="hljs-string">"https://res.mobbex.com/images/icons/def_store.png"</span>
+       },
+      <span class="hljs-string">"colors"</span>: {
+        <span class="hljs-string">"primary"</span>: <span class="hljs-string">"#FF0000"</span>
+       }
+    }
   }
 }
 </code></pre>
