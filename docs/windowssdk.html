@@ -1,0 +1,408 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Webhooks · Mobbex {DEV}</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="En esta documentación se definen los parámetros y elementos necesarios para utilizar el SDK de Mobbex en la plataforma Windows, permitiendo su integración con otras aplicaciones."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Webhooks · Mobbex {DEV}"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mobbex.dev/"/><meta property="og:description" content="En esta documentación se definen los parámetros y elementos necesarios para utilizar el SDK de Mobbex en la plataforma Windows, permitiendo su integración con otras aplicaciones."/><meta property="og:image" content="https://mobbex.dev/img/mobbex.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://mobbex.dev/img/mobbex.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/mobbex.png" alt="Mobbex {DEV}"/><h2 class="headerTitleWithLogo">Mobbex {DEV}</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started" target="_self">Docs</a></li><li class=""><a href="/help" target="_self">Ayuda</a></li><li class=""><a href="https://collectednotes.com/mobbex" target="_self">Blog</a></li><li class=""><a href="https://mobbex.com/console" target="_self">Consola</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>SDKs</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Primeros Pasos</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/getting-started">Primeros Pasos</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Módulos</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/checkout">Checkout</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_orders">Ordenes de Pago</a></li><li class="navListItem"><a class="navItem" href="/docs/subscriptions">Suscripciones</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_methods">Métodos de Pago y Cuotas</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_codes">Códigos de Barra o Insertados</a></li><li class="navListItem"><a class="navItem" href="/docs/loyalty">Fidelización</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Connect</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/dev_connect">Dev Connect</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Transacciones</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/transactions">Consulta, Devolución, Código QR de Transacción</a></li><li class="navListItem"><a class="navItem" href="/docs/webhooks">Webhooks</a></li><li class="navListItem"><a class="navItem" href="/docs/statuses">Códigos de Estado y Tipos de Medio de Pago</a></li><li class="navListItem"><a class="navItem" href="/docs/order_status">Códigos de Estado por Estado de Orden</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Mobbex Avanzado</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/split">Marketplace, Split, Cobro con Comisión</a></li><li class="navListItem"><a class="navItem" href="/docs/advanced">Integración Embebida (Avanzada)</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Ecommerce, Módulos y Librerias</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/ecommerce">E-Commerce</a></li><li class="navListItem"><a class="navItem" href="/docs/libraries">Librerias</a></li><li class="navListItem"><a class="navItem" href="/docs/client">Cliente Desktop</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">SDKs</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/nodejssdk">NodeJS</a></li><li class="navListItem"><a class="navItem" href="/docs/phpsdk">PHP</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/windowssdk">Webhooks</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Otros</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/testcards">Tarjetas de Prueba</a></li><li class="navListItem"><a class="navItem" href="/docs/currency">Conversión de Monedas</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Webhooks</h1></header><article><div><span><p>En esta documentación se definen los parámetros y elementos necesarios para utilizar el SDK de Mobbex en la plataforma Windows, permitiendo su integración con otras aplicaciones.</p>
+<h2><a class="anchor" aria-hidden="true" id="repositorio"></a><a href="#repositorio" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Repositorio</h2>
+<p>URL: <a href="https://github.com/mobbexco/desktop-sdk">https://github.com/mobbexco/desktop-sdk</a></p>
+<h4><a class="anchor" aria-hidden="true" id="primeros-pasos"></a><a href="#primeros-pasos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Primeros Pasos</h4>
+<p>Antes de comenzar, debe asegurarse de tener instalada la plataforma .NET Framework versión 4.5.2
+Todos los archivos descargados desde nuestro repositorio se deben copiar juntos en la ubicación que usted elija dentro de su aplicación. El archivo principal y con el cuál deberá interactuar vía consola es Mobbex.exe</p>
+<h4><a class="anchor" aria-hidden="true" id="configuración-de-parámetros"></a><a href="#configuración-de-parámetros" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuración de parámetros</h4>
+<p>Para poder utilizar este SDK es necesario que usted posea las Private Key y Public Key asociadas a su comercio. Esto puede generarlo desde la sección &quot;Mis Apps&quot; dentro de su cuenta de usuario.
+Estas credenciales deberán configurarse como una variable de entorno al ejecutar el SDK, dependiendo del tipo de clave necesaria en cada operación.
+El nombre de la variable de entorno utilizada es <code>APIKEY</code></p>
+<p>Por otro lado, es necesario configurar las opciones de salida del SDK, utilizadas para almacenar y/o imprimir los cupones correspondientes a las transacciones, una vez que son completadas (independientemente de su resultado). Al menos una de las dos opciones de salida debe estar configuradas, caso contrario se generará una alerta al iniciar la aplicación.
+Estos parámetros se definen en el mismo archivo de configuraciones, dentro del nodo &quot;output&quot;.</p>
+<ul>
+<li><code>folder</code>: indica la carpeta donde se almacenarán los cupones en formato PDF al finalizar la transacción</li>
+<li><code>printer</code>: este nodo contiene las propiedades de la impresora utilizada para imprimir los cupones al finalizar la transacción. La propiedad <strong>name</strong> hace referencia al nombre de la impresora tal como está definida en Windows. La propiedad <strong>type</strong> indica el tipo de impresora (valores admitidos: &quot;normal&quot; y &quot;ticket&quot;).</li>
+</ul>
+<pre><code class="hljs css language-json">"output":{
+    "folder": "..",
+  "printer": {
+    "name": "HP Laserjet 1102W",
+    "type": "normal"
+  }
+}
+</code></pre>
+<p>La definición de la carpeta y/o impresora de cupones también puede realizarse enviando estos parámetros como opciones al ejecutar Mobbex.exe, teniendo en cuenta la sintáxis de opciones por consola:</p>
+<pre><code class="hljs css language-bash">Mobbex.exe -f <span class="hljs-string">".."</span> -p <span class="hljs-string">"HP Laserjet 1102W:normal"</span>
+</code></pre>
+<p>Donde el caracter <strong>:</strong> es el separador del nombre y tipo de la impresora.
+Si se opta por esta opción, estas opciones deberán ser enviadas en toda llamada al SDK.</p>
+<h2><a class="anchor" aria-hidden="true" id="operaciones"></a><a href="#operaciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operaciones</h2>
+<h3><a class="anchor" aria-hidden="true" id="1-crear-intención-de-cobro"></a><a href="#1-crear-intención-de-cobro" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Crear intención de Cobro</h3>
+<blockquote>
+<p><code>APIKEY</code>: Llave Privada<br>
+{.is-info}</p>
+</blockquote>
+<p>El primer paso para realizar una operación es crear la intención de cobro, obteniendo el <em>Intent Token</em> necesario para las operaciones siguientes.
+Para esto se debe ejecutar la opción <strong><em>-cit</em></strong> del programa, pasando como parámetros de la opción todos los atributos de la operación en formato JSON. Los parámetros son los mismos que los definidos para un Checkout tradicional (definidos en <a href="https://mobbex.dev/docs/checkout">https://mobbex.dev/docs/checkout</a>).
+Para realizar generar una operación en modo test o modo de pruebas, simplemente se debe agregar al programa la opción <strong><em>-t</em></strong>
+Ejemplo:</p>
+<pre><code class="hljs css language-bash">Mobbex.exe -t -cit <span class="hljs-string">"{\"total\": 100, \"currency\": \"ARS\", \"description\": \"Venta de Prueba\", \"reference\": \"Referencia001\", \"customer\": {\"identification\": \"99999999\", \"email\": \"demo@mobbex.com\", \"name\": \"Demo User\"}}"</span>
+</code></pre>
+<p>En este caso el nodo &quot;customer&quot; es <strong>obligatorio</strong>:</p>
+<ul>
+<li><p><code>customer</code>: Objeto de tipo JSON con los datos del cliente.</p>
+<ul>
+<li><code>uid</code>:  Identificador único e interno del cliente. Obligatorio.</li>
+<li><code>name</code>: Nombre del Cliente. Obligatorio.</li>
+<li><code>identification</code>: DNI. Obligatorio.</li>
+<li><code>phone</code>: Número de Celular.</li>
+</ul></li>
+</ul>
+<p>La respuesta del SDK será similar a la siguiente:</p>
+<pre><code class="hljs css language-json">{
+ <span class="hljs-attr">"operation"</span>: <span class="hljs-string">"cit"</span>, 
+ <span class="hljs-attr">"type"</span>: <span class="hljs-string">"result"</span>, 
+ <span class="hljs-attr">"data"</span>: {
+   <span class="hljs-attr">"result"</span>:<span class="hljs-literal">true</span>,
+   <span class="hljs-attr">"data"</span>:{
+     <span class="hljs-attr">"id"</span>:<span class="hljs-string">"ZNLLBHDO0DK1E1FC3G"</span>,
+     <span class="hljs-attr">"url"</span>:<span class="hljs-string">"https://mobbex.com/p/checkout/v2/ZNLLBHDO0DK1E1FC3G"</span>,
+     <span class="hljs-attr">"description"</span>:<span class="hljs-string">"Venta de Prueba"</span>,
+     <span class="hljs-attr">"currency"</span>:<span class="hljs-string">"ARS"</span>,
+     <span class="hljs-attr">"total"</span>:<span class="hljs-number">100</span>,
+     <span class="hljs-attr">"created"</span>:<span class="hljs-number">1606264299516</span>,
+     <span class="hljs-attr">"customer"</span>:{
+       <span class="hljs-attr">"name"</span>:<span class="hljs-string">"Demo User"</span>
+     },
+     <span class="hljs-attr">"intent"</span>:{
+       <span class="hljs-attr">"token"</span>:<span class="hljs-string">"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b"</span>
+     }
+   }
+ }
+}
+</code></pre>
+<p>Debemos almacenar el parámetro <strong><em>token</em></strong> para utilizarlo en las próximas operaciones.</p>
+<h3><a class="anchor" aria-hidden="true" id="2-crear-token-de-tarjeta"></a><a href="#2-crear-token-de-tarjeta" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Crear Token de Tarjeta</h3>
+<blockquote>
+<p><code>APIKEY</code>: Llave Pública<br>
+{.is-info}</p>
+</blockquote>
+<p>En este paso crearemos el token perteneciente a la tarjeta con la cuál se realizará la operación.
+Se realiza con la opción <strong><em>-ct</em></strong>, pasando como parámetro el intent token generado en el paso anterior.</p>
+<pre><code class="hljs css language-bash">Mobbex.exe -ct <span class="hljs-string">"{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\"}"</span>
+</code></pre>
+<p>Existen 2 formas de cargar los datos de la tarjeta para generar el token:</p>
+<ul>
+<li><strong>Ingreso manual</strong>: con la opción <strong><em>-m</em></strong> luego de la opción -ct. Esta opción abre una ventana para que el usuario pueda cargar los datos de la tarjeta y, además, seleccionar el plan de cuotas de la operación. Ejemplo:</li>
+</ul>
+<pre><code class="hljs css language-bash">Mobbex.exe -ct <span class="hljs-string">"{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\"}"</span> -m
+</code></pre>
+<ul>
+<li><strong>Ingreso a través de lector de tarjetas Mox</strong>: con la opción <strong><em>-r</em></strong> luego de la opción -ct. Se debe indicar como parámetro de esta opción el tipo de lector a utilizar para realizar la operación, siendo los valores actualmente soportados:
+<ul>
+<li><code>BBPOS_CHBT</code>: Permite utilizar el lector BBPOS modelo CHB10</li>
+<li><code>INGENICO_5500</code>: Permite utilizar el lector Ingenico modelo Moby 5500</li>
+<li><code>INGENICO_6500</code>: Permite utilizar el lector Ingenico modelo Moby 6500</li>
+</ul></li>
+</ul>
+<pre><code class="hljs css language-bash">Mobbex.exe -ct <span class="hljs-string">"{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\"}"</span> -r <span class="hljs-string">"BBPOS_CHBT"</span>
+</code></pre>
+<p>El resultado de ejecutar el comando tendrá una salida como la siguiente:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"operation"</span>: <span class="hljs-string">"ct"</span>,
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"result"</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"result"</span>:<span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"data"</span>:{
+      <span class="hljs-attr">"token"</span>:<span class="hljs-string">"T:abgtu~Olh"</span>,
+      <span class="hljs-attr">"description"</span>:<span class="hljs-string">"Visa Débito terminada en 0010"</span>,
+      <span class="hljs-attr">"source"</span>:{
+        <span class="hljs-attr">"references"</span>:[<span class="hljs-string">"visa.debit"</span>],
+        <span class="hljs-attr">"reference"</span>:<span class="hljs-string">"visa.debit"</span>,
+        <span class="hljs-attr">"generic"</span>:<span class="hljs-string">"visa.debit"</span>,
+        <span class="hljs-attr">"compatReference"</span>:<span class="hljs-string">"visa.debit"</span>,
+        <span class="hljs-attr">"name"</span>:<span class="hljs-string">"Visa Débito"</span>,
+        <span class="hljs-attr">"shortName"</span>:<span class="hljs-string">"Visa Débito"</span>,
+        <span class="hljs-attr">"currency"</span>:<span class="hljs-string">"ARS"</span>,
+        <span class="hljs-attr">"card"</span>:{
+          <span class="hljs-attr">"level"</span>:<span class="hljs-string">"classic"</span>,
+          <span class="hljs-attr">"product"</span>:{
+            <span class="hljs-attr">"name"</span>:<span class="hljs-string">"Visa Débito"</span>,
+            <span class="hljs-attr">"shortName"</span>:<span class="hljs-string">"Visa Débit"</span>,
+            <span class="hljs-attr">"variant"</span>:<span class="hljs-string">"debit"</span>,
+            <span class="hljs-attr">"lengths"</span>:[<span class="hljs-number">16</span>],
+            <span class="hljs-attr">"gaps"</span>:[<span class="hljs-number">4</span>,<span class="hljs-number">8</span>,<span class="hljs-number">12</span>],
+            <span class="hljs-attr">"code"</span>:{
+              <span class="hljs-attr">"name"</span>:<span class="hljs-string">"CVV"</span>,
+              <span class="hljs-attr">"length"</span>:<span class="hljs-number">3</span>,
+              <span class="hljs-attr">"position"</span>:<span class="hljs-number">1</span>
+            },           <span class="hljs-attr">"logo"</span>:<span class="hljs-string">"https://res.mobbex.com/images/sources/png/visa.png"</span>,
+            <span class="hljs-attr">"validation"</span>:[<span class="hljs-string">"length"</span>,<span class="hljs-string">"exp"</span>,<span class="hljs-string">"cvv"</span>,<span class="hljs-string">"luhn"</span>]
+          },
+          <span class="hljs-attr">"issuer"</span>:{
+            <span class="hljs-attr">"shortName"</span>:<span class="hljs-string">"Visa"</span>,
+            <span class="hljs-attr">"name"</span>:<span class="hljs-string">"Visa"</span>,
+            <span class="hljs-attr">"color"</span>:<span class="hljs-string">"#122d98"</span>,
+            <span class="hljs-attr">"logo"</span>:<span class="hljs-string">"https://res.mobbex.com/images/sources/png/visa.png"</span>
+          }
+        },
+        <span class="hljs-attr">"type"</span>:<span class="hljs-string">"card"</span>,
+        <span class="hljs-attr">"priority"</span>:<span class="hljs-number">0</span>
+      }
+    }
+  }, 
+  <span class="hljs-attr">"options"</span>:{
+    <span class="hljs-attr">"bin"</span>:<span class="hljs-string">"450799"</span>,
+    <span class="hljs-attr">"installment"</span>:{
+      <span class="hljs-attr">"reference"</span>:<span class="hljs-string">"1"</span>
+    }
+  }
+}
+</code></pre>
+<p>En este paso debemos almacenar los siguientes valores:</p>
+<ul>
+<li><code>data.data.token</code>: Es el token que hace referencia a la tarjeta almacenada.</li>
+<li><code>options.bin</code>: Será utilizado en el próximo paso para identificar el tipo de tarjeta.</li>
+<li><code>options.installment.reference</code>: Hace referencia al plan de cuotas seleccionado. Aplica solo a carga manual de tarjeta.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="3-obtener-medios-de-pago-y-cuotas"></a><a href="#3-obtener-medios-de-pago-y-cuotas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Obtener Medios de Pago y Cuotas</h3>
+<blockquote>
+<p><code>APIKEY</code>: Llave Pública<br>
+{.is-info}</p>
+</blockquote>
+<p>En el caso de que la operación de tokenización haya sido realizada con un lector, o simplemente requiera obtener los medios de pago (planes de cuotas) asociados a una tarjeta, debe utilizar esta opción del SDK.
+Debe llamarse al archivo con la opción <strong><em>-gi</em></strong> pasando como parámetro de la opción los siguientes datos:</p>
+<ul>
+<li><code>it</code>: Intent token de la operación. Este parámetro es Obligatorio.</li>
+<li><code>bin</code>: Primeros 6 dígitos de la tarjeta sobre los cuales se quieren obtener los planes de cuotas. Es un valor retornado también de la operación anterior. Este parámetro es Obligatorio.</li>
+<li><code>installments</code>: esta opción indica si calcular los valores de cuotas de las formas de pago. Valores true/false. Este parámetro es opcional y por defecto es true.</li>
+</ul>
+<p>Ejemplo de utilización de esta opción:</p>
+<pre><code class="hljs css language-bash">Mobbex.exe -gi <span class="hljs-string">"{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\", \"bin\": \"450799\", \"installments\": true}"</span>
+</code></pre>
+<p>El resultado de esta operación es la siguiente:</p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"operation"</span>: <span class="hljs-string">"gi"</span>, 
+  <span class="hljs-attr">"type"</span>: <span class="hljs-string">"result"</span>, 
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"result"</span>:<span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"data"</span>:{
+      <span class="hljs-attr">"type"</span>:<span class="hljs-string">"card"</span>,
+      <span class="hljs-attr">"source"</span>:{
+        <span class="hljs-attr">"references"</span>:[<span class="hljs-string">"visa.debit"</span>],
+        <span class="hljs-attr">"reference"</span>:<span class="hljs-string">"visa.debit"</span>,
+        <span class="hljs-attr">"generic"</span>:<span class="hljs-string">"visa.debit"</span>,
+        <span class="hljs-attr">"compatReference"</span>:<span class="hljs-string">"visa.debit"</span>,
+        <span class="hljs-attr">"name"</span>:<span class="hljs-string">"Visa Débito"</span>,
+        <span class="hljs-attr">"shortName"</span>:<span class="hljs-string">"Visa Débito"</span>,
+        <span class="hljs-attr">"currency"</span>:<span class="hljs-string">"ARS"</span>,
+        <span class="hljs-attr">"card"</span>:{
+          <span class="hljs-attr">"level"</span>:<span class="hljs-string">"classic"</span>,
+          <span class="hljs-attr">"product"</span>:{
+            <span class="hljs-attr">"name"</span>:<span class="hljs-string">"Visa Débito"</span>,
+            <span class="hljs-attr">"shortName"</span>:<span class="hljs-string">"Visa Débit"</span>,
+            <span class="hljs-attr">"variant"</span>:<span class="hljs-string">"debit"</span>,
+            <span class="hljs-attr">"lengths"</span>:[<span class="hljs-number">16</span>],
+            <span class="hljs-attr">"gaps"</span>:[<span class="hljs-number">4</span>,<span class="hljs-number">8</span>,<span class="hljs-number">12</span>],
+            <span class="hljs-attr">"code"</span>:{
+              <span class="hljs-attr">"name"</span>:<span class="hljs-string">"CVV"</span>,
+              <span class="hljs-attr">"length"</span>:<span class="hljs-number">3</span>,
+              <span class="hljs-attr">"position"</span>:<span class="hljs-number">1</span>
+            },
+           <span class="hljs-attr">"logo"</span>:<span class="hljs-string">"https://res.mobbex.com/images/sources/png/visa.png"</span>,
+           <span class="hljs-attr">"validation"</span>:[<span class="hljs-string">"length"</span>,<span class="hljs-string">"exp"</span>,<span class="hljs-string">"cvv"</span>,<span class="hljs-string">"luhn"</span>]
+          },
+          <span class="hljs-attr">"issuer"</span>:{
+            <span class="hljs-attr">"shortName"</span>:<span class="hljs-string">"Visa"</span>,
+            <span class="hljs-attr">"name"</span>:<span class="hljs-string">"Visa"</span>,
+            <span class="hljs-attr">"color"</span>:<span class="hljs-string">"#122d98"</span>,
+            <span class="hljs-attr">"logo"</span>:<span class="hljs-string">"https://res.mobbex.com/images/sources/png/visa.png"</span>
+          }
+        },
+        <span class="hljs-attr">"type"</span>:<span class="hljs-string">"card"</span>,
+        <span class="hljs-attr">"priority"</span>:<span class="hljs-number">0</span>
+      },
+      <span class="hljs-attr">"installments"</span>:[{
+        <span class="hljs-attr">"name"</span>:<span class="hljs-string">"Débito"</span>,
+        <span class="hljs-attr">"description"</span>:<span class="hljs-string">"10% de descuento"</span>,
+        <span class="hljs-attr">"sourceReference"</span>:<span class="hljs-string">""</span>,
+        <span class="hljs-attr">"count"</span>:<span class="hljs-number">1</span>,
+        <span class="hljs-attr">"reference"</span>:<span class="hljs-string">"1"</span>,
+        <span class="hljs-attr">"percentage"</span>:<span class="hljs-number">-10</span>,
+        <span class="hljs-attr">"entity_percentage"</span>:<span class="hljs-number">0</span>,
+        <span class="hljs-attr">"discount"</span>:<span class="hljs-number">0</span>,
+        <span class="hljs-attr">"promo_code"</span>:<span class="hljs-string">""</span>,
+        <span class="hljs-attr">"modes"</span>:[<span class="hljs-string">"CNP"</span>,<span class="hljs-string">"CP"</span>],
+        <span class="hljs-attr">"status"</span>:<span class="hljs-string">"active"</span>,
+        <span class="hljs-attr">"order"</span>:<span class="hljs-number">1</span>,
+        <span class="hljs-attr">"updated"</span>:<span class="hljs-string">"2020-10-27T13:39:59.829Z"</span>,
+        <span class="hljs-attr">"created"</span>:<span class="hljs-string">"2020-03-25T22:37:02.155Z"</span>,
+        <span class="hljs-attr">"_id"</span>:<span class="hljs-string">"5e7bdd0e2b6c8c490948ad8d"</span>,
+        <span class="hljs-attr">"uid"</span>:<span class="hljs-string">"4EZZXHEe4"</span>,
+        <span class="hljs-attr">"type"</span>:<span class="hljs-string">"direct"</span>,
+        <span class="hljs-attr">"updatedBy"</span>:<span class="hljs-string">"5d682afc8d0b0318fd9691d7"</span>,
+        <span class="hljs-attr">"totals"</span>:{
+          <span class="hljs-attr">"currency"</span>:{
+            <span class="hljs-attr">"value"</span>:<span class="hljs-string">"TEST"</span>,
+            <span class="hljs-attr">"label"</span>:<span class="hljs-string">"Test Money"</span>,
+            <span class="hljs-attr">"symbol"</span>:<span class="hljs-string">"T$"</span>,
+            <span class="hljs-attr">"hidden"</span>:<span class="hljs-literal">false</span>
+          },
+          <span class="hljs-attr">"installment"</span>:{
+            <span class="hljs-attr">"amount"</span>:<span class="hljs-number">90</span>,
+            <span class="hljs-attr">"count"</span>:<span class="hljs-number">1</span>
+          },
+          <span class="hljs-attr">"total"</span>:<span class="hljs-number">90</span>,
+          <span class="hljs-attr">"financial"</span>:{
+            <span class="hljs-attr">"percentage"</span>:<span class="hljs-number">-10</span>,
+            <span class="hljs-attr">"amount"</span>:<span class="hljs-number">-10</span>
+          }
+        }
+      }]
+    }
+  }
+}
+</code></pre>
+<p>El parámetro a almacenar en este caso es <code>reference</code> del plan de cuotas elegido.</p>
+<h3><a class="anchor" aria-hidden="true" id="4-confirmar-operación"></a><a href="#4-confirmar-operación" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Confirmar Operación</h3>
+<blockquote>
+<p><code>APIKEY</code>: Llave Pública<br>
+{.is-info}</p>
+</blockquote>
+<p>Para confirmar la operación y ejecutar finalmente el cobro, unicamente debe llamar al SDK con la opción <strong><em>-co</em></strong> y los siguientes parámetros en formato JSON:</p>
+<ul>
+<li><code>it</code>: Intent token de la operación.</li>
+<li><code>source</code>: Nodo que contiene los datos referidos a la tarjeta a procesar.</li>
+<li><code>source.token</code>: Token de la tarjeta.</li>
+<li><code>source.bin</code>: Primeros 6 dígitos de la tarjeta (BIN) obtenido en la etapa de tokenización de la tarjeta.</li>
+<li><code>installment</code>: referencia del plan de cuotas o forma de pago de la tarjeta.</li>
+</ul>
+<p>Ejemplo:</p>
+<pre><code class="hljs css language-bash">Mobbex.exe -co <span class="hljs-string">"{\"it\": \"a143c8e2-46ae-4e61-8ddb-ec6f10f6d57b\", \"source\":{\"token\":\"T:abgtu~Olh\", \"bin\": \"450799\"}, \"installment\": \"1\"}"</span>
+</code></pre>
+<p>Al ejecutar el comando se abrirá una ventana donde deberá ingresar el código de seguridad (CVV) de la tarjeta, para poder confirmar finalmente la operación.</p>
+<p>Luego de ingresar el CVV y confirmar, el resultado del comando es similar al siguiente:</p>
+<pre><code class="hljs css language-json">{<span class="hljs-attr">"operation"</span>: <span class="hljs-string">"co"</span>,
+ <span class="hljs-attr">"type"</span>: <span class="hljs-string">"result"</span>,
+ <span class="hljs-attr">"data"</span>: {
+   <span class="hljs-attr">"result"</span>:<span class="hljs-literal">true</span>,
+   <span class="hljs-attr">"data"</span>:{
+     <span class="hljs-attr">"view"</span>:<span class="hljs-string">"result"</span>,
+     <span class="hljs-attr">"options"</span>:{},
+     <span class="hljs-attr">"id"</span>:<span class="hljs-string">"Erne0MBjK"</span>,
+     <span class="hljs-attr">"status"</span>:{
+       <span class="hljs-attr">"code"</span>:<span class="hljs-string">"400"</span>,
+       <span class="hljs-attr">"text"</span>:<span class="hljs-string">"Rechazado"</span>,
+       <span class="hljs-attr">"message"</span>:<span class="hljs-string">"La tarjeta ingresada es inválida. Verifique la tarjeta ingresada. (Cod. 103)"</span>
+     },
+     <span class="hljs-attr">"total"</span>:<span class="hljs-number">90</span>,
+     <span class="hljs-attr">"currency"</span>:{
+       <span class="hljs-attr">"value"</span>:<span class="hljs-string">"TEST"</span>,
+       <span class="hljs-attr">"label"</span>:<span class="hljs-string">"Test Money"</span>,
+       <span class="hljs-attr">"symbol"</span>:<span class="hljs-string">"T$"</span>,
+       <span class="hljs-attr">"hidden"</span>:<span class="hljs-literal">false</span>},
+     <span class="hljs-attr">"data"</span>:[
+       {
+         <span class="hljs-attr">"type"</span>:<span class="hljs-string">"item"</span>,
+        <span class="hljs-attr">"key"</span>:<span class="hljs-string">"transactionId"</span>,
+         <span class="hljs-attr">"label"</span>:<span class="hljs-string">"ID de Transacción"</span>,
+         <span class="hljs-attr">"value"</span>:<span class="hljs-string">"Erne0MBjK"</span>,
+         <span class="hljs-attr">"priority"</span>:<span class="hljs-number">2</span>,
+         <span class="hljs-attr">"visibility"</span>:<span class="hljs-string">"visible"</span>
+       },
+       {
+         <span class="hljs-attr">"type"</span>:<span class="hljs-string">"item"</span>,
+         <span class="hljs-attr">"key"</span>:<span class="hljs-string">"cardNumber"</span>,
+         <span class="hljs-attr">"label"</span>:<span class="hljs-string">"Tarjeta"</span>,
+         <span class="hljs-attr">"value"</span>:<span class="hljs-string">"450799******0010"</span>,
+         <span class="hljs-attr">"priority"</span>:<span class="hljs-number">99</span>,
+         <span class="hljs-attr">"visibility"</span>:<span class="hljs-string">"hidden"</span>
+       }
+     ],
+     <span class="hljs-attr">"actions"</span>:[
+       {
+         <span class="hljs-attr">"label"</span>:<span class="hljs-string">"Imprimir"</span>,
+         <span class="hljs-attr">"key"</span>:<span class="hljs-string">"print"</span>,
+         <span class="hljs-attr">"type"</span>:<span class="hljs-string">"default"</span>,
+         <span class="hljs-attr">"action"</span>:{
+           <span class="hljs-attr">"type"</span>:<span class="hljs-string">"print"</span>,
+           <span class="hljs-attr">"data"</span>:{
+             <span class="hljs-attr">"url"</span>:<span class="hljs-string">"https://ms.mobbex.com/prod/reports"</span>,
+             <span class="hljs-attr">"path"</span>:<span class="hljs-string">"/v2/coupon/"</span>,
+             <span class="hljs-attr">"id"</span>:<span class="hljs-string">"Erne0MBjK"</span>,
+             <span class="hljs-attr">"schema"</span>:<span class="hljs-string">"card"</span>}
+         }
+       },
+       {
+         <span class="hljs-attr">"label"</span>:<span class="hljs-string">"Reintentar"</span>,
+         <span class="hljs-attr">"key"</span>:<span class="hljs-string">"retry"</span>,
+         <span class="hljs-attr">"type"</span>:<span class="hljs-string">"primary"</span>,
+         <span class="hljs-attr">"action"</span>:{
+           <span class="hljs-attr">"type"</span>:<span class="hljs-string">"reload"</span>}
+       }]
+   }
+ }
+}
+</code></pre>
+<p>Además de la salida por consola, el sistema almacenará el cupón de la operación en formato PDF en la carpeta indicada y/o realizará la impresión del mismo por la impresora configurada.</p>
+<h3><a class="anchor" aria-hidden="true" id="5-recuperar-operación-por-cupón"></a><a href="#5-recuperar-operación-por-cupón" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. Recuperar Operación por Cupón</h3>
+<blockquote>
+<p><code>APIKEY</code>: Llave Privada
+{.is-info}</p>
+</blockquote>
+<p>Si se desea recuperar los datos de una operación teniendo su identificador de cupón, se puede hacer utilizando la opción <strong><em>-go</em></strong> del SDK, pasando como parámetro el identificador de operación en formato JSON dentro de la propiedad <code>uid</code>
+Ejemplo:</p>
+<pre><code class="hljs css language-bash">Mobbex.exe -go <span class="hljs-string">"{\"uid\": \"Erne0MBjK\"}"</span>
+</code></pre>
+<p>Si además de mostrar los datos por consola se desea obtener el comprobante de la operación (en formado PDF o por impresora) se puede agregar opcionalmente la propiedad <code>save</code> con valor <em>true</em></p>
+<pre><code class="hljs css language-bash">Mobbex.exe -go <span class="hljs-string">"{\"uid\": \"Erne0MBjK\", \"save\": true}"</span>
+</code></pre>
+<p>En este caso el comprobante se almacenará y/o imprimirá según los parámetros de configuración definidos.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/phpsdk"><span class="arrow-prev">← </span><span>PHP</span></a><a class="docs-next button" href="/docs/multiposapi"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#repositorio">Repositorio</a></li><li><a href="#operaciones">Operaciones</a><ul class="toc-headings"><li><a href="#1-crear-intención-de-cobro">1. Crear intención de Cobro</a></li><li><a href="#2-crear-token-de-tarjeta">2. Crear Token de Tarjeta</a></li><li><a href="#3-obtener-medios-de-pago-y-cuotas">3. Obtener Medios de Pago y Cuotas</a></li><li><a href="#4-confirmar-operación">4. Confirmar Operación</a></li><li><a href="#5-recuperar-operación-por-cupón">5. Recuperar Operación por Cupón</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/mobbex.png" alt="Mobbex {DEV}" width="58" height="52"/></a><div><h5>Documentación</h5><a href="/docs/getting-started">Comenzá ahora</a><a href="/docs/checkout">Checkout</a><a href="/docs/payment_orders">Ordenes de Pago</a><a href="/docs/mobbex_button">Botón Mobbex</a><a href="/docs/ecommerce">Plugins para Ecommerce</a></div><div><h5>Sobre Mobbex</h5><a href="https://mobbex.com/console" target="_blank" rel="noreferrer noopener">Usuarios y Registro</a><a href="https://www.mobbex.com/comoseusa/" target="_blank" rel="noreferrer noopener">Cómo se usa?</a><a href="https://www.mobbex.com/contactanos/" target="_blank" rel="noreferrer noopener">Contactanos</a><a href="https://twitter.com/mobbex" target="_blank" rel="noreferrer noopener">Encontranos en Twitter</a></div><div><h5>Más</h5><a href="/blog">Blog</a><a href="https://github.com/mobbexco">GitHub</a></div></section><a href="https://www.mobbex.com" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Mobbex Argentina SRL</section></footer></div><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script></body></html>

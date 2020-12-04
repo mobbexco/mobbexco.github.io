@@ -1,0 +1,439 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>SDK para NodeJS · Mobbex {DEV}</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Instalación"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="SDK para NodeJS · Mobbex {DEV}"/><meta property="og:type" content="website"/><meta property="og:url" content="https://mobbex.dev/"/><meta property="og:description" content="## Instalación"/><meta property="og:image" content="https://mobbex.dev/img/mobbex.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://mobbex.dev/img/mobbex.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/mobbex.png" alt="Mobbex {DEV}"/><h2 class="headerTitleWithLogo">Mobbex {DEV}</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started" target="_self">Docs</a></li><li class=""><a href="/help" target="_self">Ayuda</a></li><li class=""><a href="https://collectednotes.com/mobbex" target="_self">Blog</a></li><li class=""><a href="https://mobbex.com/console" target="_self">Consola</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>SDKs</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Primeros Pasos</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/getting-started">Primeros Pasos</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Módulos</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/checkout">Checkout</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_orders">Ordenes de Pago</a></li><li class="navListItem"><a class="navItem" href="/docs/subscriptions">Suscripciones</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_methods">Métodos de Pago y Cuotas</a></li><li class="navListItem"><a class="navItem" href="/docs/payment_codes">Códigos de Barra o Insertados</a></li><li class="navListItem"><a class="navItem" href="/docs/loyalty">Fidelización</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Connect</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/dev_connect">Dev Connect</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Transacciones</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/transactions">Consulta, Devolución, Código QR de Transacción</a></li><li class="navListItem"><a class="navItem" href="/docs/webhooks">Webhooks</a></li><li class="navListItem"><a class="navItem" href="/docs/statuses">Códigos de Estado y Tipos de Medio de Pago</a></li><li class="navListItem"><a class="navItem" href="/docs/order_status">Códigos de Estado por Estado de Orden</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Mobbex Avanzado</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/split">Marketplace, Split, Cobro con Comisión</a></li><li class="navListItem"><a class="navItem" href="/docs/advanced">Integración Embebida (Avanzada)</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Ecommerce, Módulos y Librerias</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/ecommerce">E-Commerce</a></li><li class="navListItem"><a class="navItem" href="/docs/libraries">Librerias</a></li><li class="navListItem"><a class="navItem" href="/docs/client">Cliente Desktop</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">SDKs</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/nodejssdk">NodeJS</a></li><li class="navListItem"><a class="navItem" href="/docs/phpsdk">PHP</a></li><li class="navListItem"><a class="navItem" href="/docs/windowssdk">Webhooks</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Otros</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/testcards">Tarjetas de Prueba</a></li><li class="navListItem"><a class="navItem" href="/docs/currency">Conversión de Monedas</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">SDK para NodeJS</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="instalación"></a><a href="#instalación" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Instalación</h2>
+<p>Instalar el paquete usando:</p>
+<pre><code class="hljs css language-sh">npm install mobbex --save
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="repositorio"></a><a href="#repositorio" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Repositorio</h2>
+<p>URL: <a href="https://github.com/mobbexco/nodejs">https://github.com/mobbexco/nodejs</a></p>
+<h2><a class="anchor" aria-hidden="true" id="uso"></a><a href="#uso" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h2>
+<h3><a class="anchor" aria-hidden="true" id="configuración"></a><a href="#configuración" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuración</h3>
+<p>El paquete debe ser configurado utilizando la clave API de la aplicación y el Token de Acceso de la entidad dentro de un objeto:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> mobbex = <span class="hljs-built_in">require</span>(<span class="hljs-string">"mobbex"</span>);
+
+mobbex.configurations.configure({
+  <span class="hljs-attr">apiKey</span>: <span class="hljs-string">"API-KEY"</span>,
+  <span class="hljs-attr">accessToken</span>: <span class="hljs-string">"ACCESS-TOKEN"</span>,
+});
+</code></pre>
+<p>En caso de necesitar utilizar el Audit Key, simplemente se agrega al objeto junto con la clave API y el Token de Acceso:</p>
+<pre><code class="hljs css language-javascript">mobbex.configurations.configure({
+  <span class="hljs-attr">apiKey</span>: <span class="hljs-string">"API-KEY"</span>,
+  <span class="hljs-attr">accessToken</span>: <span class="hljs-string">"ACESS-TOKEN"</span>,
+  <span class="hljs-attr">auditKey</span>: <span class="hljs-string">"AUDIT-KEY"</span>,
+});
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="checkout"></a><a href="#checkout" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checkout</h3>
+<h5><a class="anchor" aria-hidden="true" id="crear"></a><a href="#crear" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Crear</h5>
+<p>Para crear un checkout se utiliza <code>checkout.create</code> pasando como argumento el objeto del checkout:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> checkout = {
+  <span class="hljs-attr">total</span>: <span class="hljs-number">100.2</span>,
+  <span class="hljs-attr">currency</span>: <span class="hljs-string">"ARS"</span>,
+  <span class="hljs-attr">reference</span>: <span class="hljs-string">"2982-2XtPXlgSaWccqUyobuv4sEmLYMV0N6oX6MoridMw"</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">"Descripción de la Venta"</span>,
+  <span class="hljs-attr">items</span>: [
+    {
+      <span class="hljs-attr">image</span>: <span class="hljs-string">"https://www.mobbex.com/wp-content/uploads/2019/03/web_logo.png"</span>,
+      <span class="hljs-attr">quantity</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">description</span>: <span class="hljs-string">"Mi Producto"</span>,
+      <span class="hljs-attr">total</span>: <span class="hljs-number">50</span>,
+    },
+    {
+      <span class="hljs-attr">image</span>: <span class="hljs-string">"https://www.mobbex.com/wp-content/uploads/2019/03/web_logo.png"</span>,
+      <span class="hljs-attr">quantity</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">description</span>: <span class="hljs-string">"Mi otro producto"</span>,
+      <span class="hljs-attr">total</span>: <span class="hljs-number">50.2</span>,
+    },
+  ],
+  <span class="hljs-attr">options</span>: {
+    <span class="hljs-attr">domain</span>: <span class="hljs-string">"midominio.com"</span>,
+  },
+  <span class="hljs-attr">return_url</span>: <span class="hljs-string">"https://mobbex.com/sale/return?session=56789"</span>,
+  <span class="hljs-attr">webhook</span>: <span class="hljs-string">"https://mobbex.com/sale/webhook?user=1234"</span>,
+};
+
+mobbex.checkout
+  .create(checkout)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="split"></a><a href="#split" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Split</h3>
+<h5><a class="anchor" aria-hidden="true" id="checkout-con-split"></a><a href="#checkout-con-split" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checkout con Split</h5>
+<p>Para realizar un checkout con modalidad split se utiliza <code>checkout.split</code>:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> split = {
+  <span class="hljs-attr">total</span>: <span class="hljs-number">1000</span>,
+  <span class="hljs-attr">currency</span>: <span class="hljs-string">"ars"</span>,
+  <span class="hljs-attr">reference</span>: <span class="hljs-string">"12345"</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">"Descripción de la Venta"</span>,
+  <span class="hljs-attr">split</span>: [
+    {
+      <span class="hljs-attr">tax_id</span>: <span class="hljs-string">"30121231235"</span>,
+      <span class="hljs-attr">total</span>: <span class="hljs-number">900</span>,
+      <span class="hljs-attr">reference</span>: <span class="hljs-string">"pago_1"</span>,
+      <span class="hljs-attr">fee</span>: <span class="hljs-number">100</span>,
+    },
+    {
+      <span class="hljs-attr">tax_id</span>: <span class="hljs-string">"33213213216"</span>,
+      <span class="hljs-attr">total</span>: <span class="hljs-number">100</span>,
+      <span class="hljs-attr">reference</span>: <span class="hljs-string">"pago_2"</span>,
+      <span class="hljs-attr">fee</span>: <span class="hljs-number">80</span>,
+    },
+  ],
+};
+
+mobbex.checkout
+  .split(split)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="liberar-fondos"></a><a href="#liberar-fondos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Liberar Fondos</h5>
+<p>Para liberar fondos retenidos durante una operación de tipo Split simplemente se utiliza <code>checkout.release</code>:</p>
+<pre><code class="hljs css language-javascript">mobbex.checkout
+  .release(<span class="hljs-string">"ID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="ordenes-de-pago"></a><a href="#ordenes-de-pago" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ordenes de Pago</h3>
+<h5><a class="anchor" aria-hidden="true" id="crear-1"></a><a href="#crear-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Crear</h5>
+<p>Para crear un checkout se utiliza <code>paymentOrder.create</code> pasando como argumento el objeto de la orden de pago:</p>
+<pre><code class="hljs css language-javascript">paymentOder = {
+  <span class="hljs-attr">total</span>: <span class="hljs-number">100</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">"Some Description #3"</span>,
+  <span class="hljs-attr">actions</span>: [
+    {
+      <span class="hljs-attr">icon</span>: <span class="hljs-string">"attachment"</span>,
+      <span class="hljs-attr">title</span>: <span class="hljs-string">"Factura"</span>,
+      <span class="hljs-attr">url</span>: <span class="hljs-string">"https://speryans.com/mifactura/123"</span>,
+    },
+  ],
+  <span class="hljs-attr">reference</span>: <span class="hljs-string">"mi_referencia_123"</span>,
+};
+
+mobbex.paymentOrder
+  .create(paymentOrder)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="métodos-de-pago-y-cuotas"></a><a href="#métodos-de-pago-y-cuotas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Métodos de Pago y Cuotas</h3>
+<h5><a class="anchor" aria-hidden="true" id="listado-de-métodos-de-pago"></a><a href="#listado-de-métodos-de-pago" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Listado de Métodos de Pago</h5>
+<p>Para listar los métodos de pago se utiliza <code>sources.list</code> pasando como argumentos el código de acceso y el total:</p>
+<pre><code class="hljs css language-javascript">mobbex.sources
+  .list(<span class="hljs-string">"CODIGO"</span>, <span class="hljs-number">200</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="códigos-de-barra-o-insertados"></a><a href="#códigos-de-barra-o-insertados" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Códigos de Barra o Insertados</h3>
+<h5><a class="anchor" aria-hidden="true" id="crear-2"></a><a href="#crear-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Crear</h5>
+<p>Se utiliza <code>paymentCode.create</code> pasando como argumentos el código y un objeto con los parámetros:</p>
+<pre><code class="hljs css language-javascript">mobbex.paymentCode
+  .create(<span class="hljs-string">"CODIGO"</span>, {
+    <span class="hljs-attr">reference</span>: <span class="hljs-string">"reference"</span>,
+    <span class="hljs-attr">total</span>: <span class="hljs-number">3230</span>,
+    <span class="hljs-attr">expiration</span>: <span class="hljs-string">"01-12-2020"</span>,
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="fidelización"></a><a href="#fidelización" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fidelización</h3>
+<p>Para utilizar el módulo de fidelización es necesario configurar un Audit Key. Esto se puede realizar ya sea agregandolo al objeto de <code>configurations.configure</code> o utilizando <code>configurations.setAuditKey('AUDIT-KEY')</code></p>
+<h5><a class="anchor" aria-hidden="true" id="búsqueda-de-cuenta"></a><a href="#búsqueda-de-cuenta" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Búsqueda de Cuenta</h5>
+<p>Se utiliza <code>loyalty.search</code> pasando como argumento un objeto con la referencia:</p>
+<pre><code class="hljs css language-javascript">mobbex.loyalty
+  .search({ <span class="hljs-attr">reference</span>: <span class="hljs-string">"mi-referencia"</span> })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="creación-de-cuenta"></a><a href="#creación-de-cuenta" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creación de Cuenta</h5>
+<p>Se utiliza <code>loyalty.create</code> pasando como argumento el objeto con los parámetros de la nueva cuenta:</p>
+<pre><code class="hljs css language-javascript">mobbex.loyalty
+  .create({
+    <span class="hljs-attr">identification</span>: <span class="hljs-string">"12312312"</span>,
+    <span class="hljs-attr">email</span>: <span class="hljs-string">"demo@mobbex.com"</span>,
+    <span class="hljs-attr">tax_id</span>: <span class="hljs-string">"30121231234"</span>,
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="balance-de-cuenta"></a><a href="#balance-de-cuenta" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Balance de Cuenta</h5>
+<p>Se utiliza <code>loyalty.balance</code> pasando como argumento un objeto con la credencial:</p>
+<pre><code class="hljs css language-javascript">mobbex.loyalty
+  .balance({ <span class="hljs-attr">credential</span>: <span class="hljs-string">"123123123"</span> })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="carga-de-puntos"></a><a href="#carga-de-puntos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Carga de puntos</h5>
+<p>Se utiliza <code>loyalty.charge</code> pasando como argumento el objeto con la información necesaria:</p>
+<pre><code class="hljs css language-javascript">mobbex.loyalty
+  .charge({
+    <span class="hljs-attr">credential</span>: <span class="hljs-string">"123123123"</span>,
+    <span class="hljs-attr">tax_id</span>: <span class="hljs-string">"30121231234"</span>,
+    <span class="hljs-attr">points</span>: <span class="hljs-number">32</span>,
+    <span class="hljs-attr">reference</span>: <span class="hljs-string">"chargeReference"</span>,
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="subscripciones"></a><a href="#subscripciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Subscripciones</h3>
+<h5><a class="anchor" aria-hidden="true" id="crear-3"></a><a href="#crear-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Crear</h5>
+<p>Para crear una subscripción se utiliza <code>subscriptions.create</code> pasando como argumento el objeto con la nueva subscripción:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> subscription = {
+  <span class="hljs-attr">total</span>: <span class="hljs-number">200.0</span>,
+  <span class="hljs-attr">currency</span>: <span class="hljs-string">"ARS"</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"Prueba"</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">"Prueba"</span>,
+  <span class="hljs-attr">type</span>: <span class="hljs-string">"dynamic"</span>,
+  <span class="hljs-attr">interval</span>: <span class="hljs-string">"1m"</span>,
+  <span class="hljs-attr">trial</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">webhook</span>: <span class="hljs-string">"http://webhook"</span>,
+  <span class="hljs-attr">return_url</span>: <span class="hljs-string">"http://return_url"</span>,
+  <span class="hljs-attr">features</span>: [<span class="hljs-string">"accept_no_funds"</span>],
+};
+
+mobbex.subscriptions
+  .create(subscripcion)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="editar"></a><a href="#editar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Editar</h5>
+<p>Para editar una subscripción se pasan como argumentos el ID y un objeto con los cambios:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscriptions
+  .edit(<span class="hljs-string">"ID"</span>, { <span class="hljs-attr">total</span>: <span class="hljs-number">300.0</span> })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="obtener-todas"></a><a href="#obtener-todas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Obtener todas</h5>
+<p>Para obtener todas las subscripciones:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscriptions
+  .all()
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="buscar"></a><a href="#buscar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Buscar</h5>
+<p>Para buscar una subscripción:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscriptions
+  .find(<span class="hljs-string">"ID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="activar"></a><a href="#activar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Activar</h5>
+<p>Para activar una subscripción:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscriptions
+  .activate(<span class="hljs-string">"ID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="eliminar"></a><a href="#eliminar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Eliminar</h5>
+<p>Para eliminar una subscripción:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscriptions
+  .delete(<span class="hljs-string">"ID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="suscriptores"></a><a href="#suscriptores" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Suscriptores</h4>
+<p>Para los ejemplos <code>ID</code> es el ID de la subscripción y <code>SID</code> el ID del subscriptor</p>
+<h5><a class="anchor" aria-hidden="true" id="crear-4"></a><a href="#crear-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Crear</h5>
+<p>Para crear un nuevo subscriptor se utiliza <code>subscribers.create</code> pasando como argumentos el ID de la subscripción y un objeto con el nuevo subscriptor:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> subscriber = {
+  <span class="hljs-attr">customer</span>: {
+    <span class="hljs-attr">identification</span>: <span class="hljs-string">"32321321"</span>,
+    <span class="hljs-attr">email</span>: <span class="hljs-string">"demo@mobbex.com"</span>,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">"Demo User"</span>,
+  },
+  <span class="hljs-attr">startDate</span>: {
+    <span class="hljs-attr">day</span>: <span class="hljs-number">15</span>,
+    <span class="hljs-attr">month</span>: <span class="hljs-number">5</span>,
+  },
+  <span class="hljs-attr">reference</span>: <span class="hljs-string">"demo_user_321"</span>,
+};
+
+mobbex.subscribers
+  .create(<span class="hljs-string">"ID"</span>, subscriber)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="obtener-todos"></a><a href="#obtener-todos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Obtener todos</h5>
+<p>Para obtener todos los usuarios de una subscripción se pasa como argumento el ID de la subscripción:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscribers
+  .all(<span class="hljs-string">"ID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="buscar-1"></a><a href="#buscar-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Buscar</h5>
+<p>Para buscar un subscriptor se pasan como argumentos el ID de la subscripción y del subscriptor:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscribers
+  .find(<span class="hljs-string">"ID"</span>, <span class="hljs-string">"SID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="editar-1"></a><a href="#editar-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Editar</h5>
+<p>Para editar un subscriptor se pasan como argumentos el ID de la subscripción y del subscriptor y un objeto con los nuevos parámetros. (Los parámetros son opcionales):</p>
+<pre><code class="hljs css language-javascript">moobex.subscribers
+  .edit(<span class="hljs-string">"ID"</span>, <span class="hljs-string">"SID"</span>, {
+    <span class="hljs-attr">total</span>: <span class="hljs-number">300</span>,
+    <span class="hljs-attr">reference</span>: <span class="hljs-string">"new_reference"</span>,
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="suspender-y-activar"></a><a href="#suspender-y-activar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Suspender y Activar</h5>
+<p>Para suspenderlo y activarlo se pasan como argumentos el ID de la subscripción y del subscriptor:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscribers
+  .suspend(<span class="hljs-string">"ID"</span>, <span class="hljs-string">"SID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+
+mobbex.subscribers
+  .activate(<span class="hljs-string">"ID"</span>, <span class="hljs-string">"SID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="cambiar-agenda"></a><a href="#cambiar-agenda" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cambiar Agenda</h5>
+<p>Para cambiar su agenda se pasan como argumentos el ID de la subscripción y del subscriptor y un objeto con la fecha de inicio:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscribers
+  .reschedule(<span class="hljs-string">"ID"</span>, <span class="hljs-string">"SID"</span>, {
+    <span class="hljs-attr">startDate</span>: {
+      <span class="hljs-attr">day</span>: <span class="hljs-number">15</span>,
+      <span class="hljs-attr">month</span>: <span class="hljs-number">5</span>,
+    },
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="mover-a-otra-subscripción"></a><a href="#mover-a-otra-subscripción" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mover a otra subscripción</h5>
+<p>Para moverlo a otra subscripción se pasan como argumentos el ID de la subscripción y del subscriptor y un objeto con el ID de la nueva subscripción:</p>
+<pre><code class="hljs css language-javascript">mobbex.subscribers
+  .move(<span class="hljs-string">"ID"</span>, <span class="hljs-string">"SID"</span>, {
+    <span class="hljs-attr">sid</span>: <span class="hljs-string">"new_subscription_id"</span>,
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="dev-connect"></a><a href="#dev-connect" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dev Connect</h3>
+<h5><a class="anchor" aria-hidden="true" id="crear-solicitud"></a><a href="#crear-solicitud" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Crear Solicitud</h5>
+<p>Para crear una solicitud se utiliza <code>devConnect.create</code> pasando como argumento el objeto con el url de retorno:</p>
+<pre><code class="hljs css language-javascript">mobbex.devConnect
+  .create({
+    <span class="hljs-attr">return_url</span>: <span class="hljs-string">"https://mobbex.com/"</span>,
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="obtener-credenciales"></a><a href="#obtener-credenciales" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Obtener Credenciales</h5>
+<p>Para obtener credenciales se utiliza <code>devConnect.get</code> pasando como argumento el ID de la solicitud:</p>
+<pre><code class="hljs css language-javascript">mobbex.devConnect
+  .get(<span class="hljs-string">"ID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="transacciones"></a><a href="#transacciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Transacciones</h3>
+<h5><a class="anchor" aria-hidden="true" id="listar-transacciones"></a><a href="#listar-transacciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Listar transacciones</h5>
+<p>Se utiliza <code>transactions.get</code> pasando como argumento la referencia de la factura o pago:</p>
+<pre><code class="hljs css language-javascript">mobbex.transactions
+  .get(<span class="hljs-string">"REFERENCIA"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="listado-y-búsqueda-de-transacciones"></a><a href="#listado-y-búsqueda-de-transacciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Listado y Búsqueda de Transacciones</h5>
+<p>Se utiliza <code>transactions.search</code> pasando como argumento el objeto con los parámetros de búsqueda. Por defecto se realiza un POST request, pero si se quiere realizar un GET request, se agrega <code>'get'</code> como segundo parametro:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">// POST REQUEST:</span>
+mobbex.transactions
+  .search({
+    <span class="hljs-comment">// page y limit van dentro del objeto</span>
+    <span class="hljs-comment">// a pesar de ser párametros en URL</span>
+    <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+    <span class="hljs-attr">currency</span>: <span class="hljs-string">"ARS"</span>,
+  })
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+
+<span class="hljs-comment">// GET REQUEST:</span>
+mobbex.transactions
+  .search(
+    {
+      <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+      <span class="hljs-attr">currency</span>: <span class="hljs-string">"ARS"</span>,
+    },
+    <span class="hljs-string">"get"</span>
+  )
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="devolución--anulación"></a><a href="#devolución--anulación" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Devolución / Anulación</h5>
+<p>Se utiliza <code>transactions.refund</code> pasando como argumento el ID de la transacción:</p>
+<pre><code class="hljs css language-javascript">mobbex.transactions
+  .refund(<span class="hljs-string">"ID"</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="devolución-parcial"></a><a href="#devolución-parcial" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Devolución Parcial</h5>
+<p>Se utiliza <code>transactions.partialRefund</code> pasando como argumentos el ID de la transacción y el total:</p>
+<pre><code class="hljs css language-javascript">mobbex.transactions
+  .partialRefund(<span class="hljs-string">"ID"</span>, <span class="hljs-number">200</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" id="capturar-operación"></a><a href="#capturar-operación" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Capturar Operación</h5>
+<p>Se utiliza <code>transactions.capture</code> pasando como argumentos el ID de la transacción y el total:</p>
+<pre><code class="hljs css language-javascript">mobbex.transactions
+  .capture(<span class="hljs-string">"ID"</span>, <span class="hljs-number">200</span>)
+  .then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(data))
+  .catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(error));
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/client"><span class="arrow-prev">← </span><span>Cliente Desktop</span></a><a class="docs-next button" href="/docs/phpsdk"><span>PHP</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#instalación">Instalación</a></li><li><a href="#repositorio">Repositorio</a></li><li><a href="#uso">Uso</a><ul class="toc-headings"><li><a href="#configuración">Configuración</a></li><li><a href="#checkout">Checkout</a></li><li><a href="#split">Split</a></li><li><a href="#ordenes-de-pago">Ordenes de Pago</a></li><li><a href="#métodos-de-pago-y-cuotas">Métodos de Pago y Cuotas</a></li><li><a href="#códigos-de-barra-o-insertados">Códigos de Barra o Insertados</a></li><li><a href="#fidelización">Fidelización</a></li><li><a href="#subscripciones">Subscripciones</a></li><li><a href="#dev-connect">Dev Connect</a></li><li><a href="#transacciones">Transacciones</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/mobbex.png" alt="Mobbex {DEV}" width="58" height="52"/></a><div><h5>Documentación</h5><a href="/docs/getting-started">Comenzá ahora</a><a href="/docs/checkout">Checkout</a><a href="/docs/payment_orders">Ordenes de Pago</a><a href="/docs/mobbex_button">Botón Mobbex</a><a href="/docs/ecommerce">Plugins para Ecommerce</a></div><div><h5>Sobre Mobbex</h5><a href="https://mobbex.com/console" target="_blank" rel="noreferrer noopener">Usuarios y Registro</a><a href="https://www.mobbex.com/comoseusa/" target="_blank" rel="noreferrer noopener">Cómo se usa?</a><a href="https://www.mobbex.com/contactanos/" target="_blank" rel="noreferrer noopener">Contactanos</a><a href="https://twitter.com/mobbex" target="_blank" rel="noreferrer noopener">Encontranos en Twitter</a></div><div><h5>Más</h5><a href="/blog">Blog</a><a href="https://github.com/mobbexco">GitHub</a></div></section><a href="https://www.mobbex.com" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Mobbex Argentina SRL</section></footer></div><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script></body></html>
