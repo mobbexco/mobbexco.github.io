@@ -91,8 +91,11 @@
 <li><code>validate_id</code>: Validate ID controlará el DNI del suscriptor contra el Tarjeta-Habiente rechazando la operación en caso de no coincidir.</li>
 <li><code>accept_no_funds</code>: Accept No Funds aceptará los casos donde la tarjeta no posea fondos como un caso válido de tokenización.</li>
 <li><code>no_email</code>: Desactivará los emails de aviso al Suscriptor pero no los emails de aviso al comercio.</li>
+<li><code>no_cc</code>: Desactivará la cuenta corriente, por lo tanto si el cliente posee deuda no intentará recobrarla automáticamente.</li>
+<li><code>no_retry</code>: Desactivará el reintento de cobro automático. Si un cobro falla deberá ejecutarlo manualmente.</li>
 </ul></li>
 <li><code>sources</code>: El checkout permite la limitación de los medios de pago aceptados. Para realizar dicha limitación se debe enviar un array de medios a aceptar. Ej.</li>
+<li><code>split</code>: Ver Sección Modalidad Split</li>
 </ul>
 <pre><code class="hljs css language-json">{
     <span class="hljs-attr">"sources"</span>: [<span class="hljs-string">"visa"</span>, <span class="hljs-string">"mastercard"</span>]
@@ -112,16 +115,15 @@
     <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-attr">"data"</span>: {
         <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"mv4vuUGYG"</span>,
-        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"dynamic"</span>,
-        <span class="hljs-attr">"interval"</span>: <span class="hljs-string">"1m"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Mi suscripción"</span>,
+        <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Mi descripción"</span>,
         <span class="hljs-attr">"limit"</span>: <span class="hljs-number">12</span>,
+        <span class="hljs-attr">"interval"</span>: <span class="hljs-string">"1m"</span>,
+        <span class="hljs-attr">"total"</span>: <span class="hljs-number">100</span>,
         <span class="hljs-attr">"trial"</span>: <span class="hljs-number">0</span>,
         <span class="hljs-attr">"shorten_url"</span>: <span class="hljs-string">"http://mbbx.co/aQhnwh"</span>,
         <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://mobbex.com/p/subscriptions/subscribe/P2434fDxJ"</span>,
-        <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"ARS"</span>,
-        <span class="hljs-attr">"status"</span>: <span class="hljs-string">"active"</span>,
-        <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Mi suscripción 1"</span>,
-        <span class="hljs-attr">"total"</span>: <span class="hljs-number">100</span>,
+        <span class="hljs-attr">"return_url"</span>: <span class="hljs-string">"https://mobbex.com"</span>,
         <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2019-06-21T14:17:03.157Z"</span>
     }
 }
@@ -130,6 +132,63 @@
 <h3><a class="anchor" aria-hidden="true" id="obtener-suscripciones"></a><a href="#obtener-suscripciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Obtener Suscripciones</h3>
 <h4><a class="anchor" aria-hidden="true" id="url-y-método-1"></a><a href="#url-y-método-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
 <pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="respuesta-1"></a><a href="#respuesta-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Respuesta</h4>
+<p>Tenga en cuenta que las respuestas del servicio siempre serán en formato JSON.</p>
+<p><strong>JSON</strong></p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"docs"</span>: [
+      {
+        <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"qLLSnBV35"</span>,
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"dynamic"</span>,
+        <span class="hljs-attr">"interval"</span>: <span class="hljs-string">"1m"</span>,
+        <span class="hljs-attr">"limit"</span>: <span class="hljs-number">4</span>,
+        <span class="hljs-attr">"trial"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"initialDay"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"shorten_url"</span>: <span class="hljs-string">"http://mbbx.co/j7zcKwR"</span>,
+        <span class="hljs-attr">"return_url"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-attr">"webhook"</span>: <span class="hljs-string">""</span>,
+        <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"ARS"</span>,
+        <span class="hljs-attr">"status"</span>: <span class="hljs-string">"active"</span>,
+        <span class="hljs-attr">"customerForm"</span>: <span class="hljs-string">"default"</span>,
+        <span class="hljs-attr">"features"</span>: [
+          <span class="hljs-string">"validate_id"</span>,
+          <span class="hljs-string">"accept_no_funds"</span>,
+          <span class="hljs-string">"no_email"</span>
+        ],
+        <span class="hljs-attr">"sources"</span>: [],
+        <span class="hljs-attr">"entity"</span>: <span class="hljs-string">"5761a3dd8aad6c120042b287"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Mi suscripción 1"</span>,
+        <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Descripción de mi suscripción"</span>,
+        <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"qLLSnBV35"</span>,
+        <span class="hljs-attr">"total"</span>: <span class="hljs-number">2555</span>,
+        <span class="hljs-attr">"options"</span>: {
+          <span class="hljs-attr">"button"</span>: <span class="hljs-literal">false</span>,
+          <span class="hljs-attr">"embed"</span>: <span class="hljs-literal">false</span>,
+          <span class="hljs-attr">"domain"</span>: <span class="hljs-literal">null</span>,
+          <span class="hljs-attr">"theme"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"light"</span>,
+            <span class="hljs-attr">"background"</span>: <span class="hljs-string">""</span>,
+            <span class="hljs-attr">"showHeader"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"showBack"</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">"header"</span>: <span class="hljs-literal">false</span>,
+            <span class="hljs-attr">"colors"</span>: {
+              <span class="hljs-attr">"primary"</span>: <span class="hljs-string">"#6f00ff"</span>
+            }
+          }
+        },
+        <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2020-11-19T18:26:33.038Z"</span>,
+        <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2020-11-19T18:26:33.041Z"</span>,
+        <span class="hljs-attr">"agenda"</span>: [],
+        <span class="hljs-attr">"__v"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://mobbex.com/p/subscriptions/subscribe/qLLSnBV35"</span>,
+        <span class="hljs-attr">"count"</span>: <span class="hljs-number">1</span>
+      },
+    ]
+  }
+}
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="filtrar-suscripciones-por-página"></a><a href="#filtrar-suscripciones-por-página" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Filtrar Suscripciones por página</h3>
 <h4><a class="anchor" aria-hidden="true" id="url-y-método-2"></a><a href="#url-y-método-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
@@ -164,24 +223,163 @@
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" id="suscriptores"></a><a href="#suscriptores" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Suscriptores</h2>
-<h3><a class="anchor" aria-hidden="true" id="obtener-suscriptores"></a><a href="#obtener-suscriptores" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Obtener Suscriptores</h3>
+<h3><a class="anchor" aria-hidden="true" id="ejecutar-cobros-manuales-masivamente"></a><a href="#ejecutar-cobros-manuales-masivamente" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ejecutar cobros manuales masivamente</h3>
+<p>Tenga en cuenta que esta API Solamente retornará que el proceso fue aceptado exitosamente. La ejecución se realizará de fondo y se notificará via Webhooks.</p>
 <h4><a class="anchor" aria-hidden="true" id="url-y-método-6"></a><a href="#url-y-método-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
-<pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber
+<pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/action/execute
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-5"></a><a href="#parámetros-de-la-url-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 </ul>
-<h3><a class="anchor" aria-hidden="true" id="crear-suscriptor"></a><a href="#crear-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Crear Suscriptor</h3>
+<h4><a class="anchor" aria-hidden="true" id="json-body--post--1"></a><a href="#json-body--post--1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
+<p><strong><em>Importante</em></strong>: Array de Objetos de Tipo JSON</p>
+<p><em>Requeridos</em></p>
+<ul>
+<li><code>sid</code>: Moneda de la operación. Sólo admite ARS.</li>
+<li><code>total</code>: Monto de la operación. Formato XXX.xx donde el <strong><em>PUNTO</em></strong> es el separador decimal.</li>
+<li><code>reference</code>: Referencia que identifique al suscriptor.</li>
+<li><code>description</code>: Permite personalizar la descripción del Cobro.</li>
+<li><code>test</code>: Marca al suscriptor como Prueba. Esto no puede cambiarse. Un suscriptor de prueba nunca podrá dejar de serlo. Valores aceptados: true / false. Defecto: false</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="suscriptores"></a><a href="#suscriptores" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Suscriptores</h2>
+<h3><a class="anchor" aria-hidden="true" id="obtener-suscriptores"></a><a href="#obtener-suscriptores" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Obtener Suscriptores</h3>
 <h4><a class="anchor" aria-hidden="true" id="url-y-método-7"></a><a href="#url-y-método-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
-<pre><code class="hljs css language-http">POST https://api.mobbex.com/p/subscriptions/{id}/subscriber
+<pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-6"></a><a href="#parámetros-de-la-url-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="json-body--post--1"></a><a href="#json-body--post--1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
+<h4><a class="anchor" aria-hidden="true" id="respuesta-2"></a><a href="#respuesta-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Respuesta</h4>
+<p>Tenga en cuenta que las respuestas del servicio siempre serán en formato JSON.</p>
+<p><strong>JSON</strong></p>
+<pre><code class="hljs css language-json">{
+  <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"subscriber"</span>: {
+      <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"SEIs_LPHA"</span>,
+      <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"0000"</span>,
+      <span class="hljs-attr">"total"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"customerData"</span>: {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Perez"</span>,
+        <span class="hljs-attr">"identification"</span>: <span class="hljs-string">"37941543"</span>,
+        <span class="hljs-attr">"email"</span>: <span class="hljs-string">"juanperez@mobbex.com"</span>
+      },
+      <span class="hljs-attr">"status"</span>: <span class="hljs-string">"active"</span>,
+      <span class="hljs-attr">"agenda"</span>: [
+        {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"period"</span>,
+          <span class="hljs-attr">"year"</span>: <span class="hljs-number">0</span>,
+          <span class="hljs-attr">"_id"</span>: <span class="hljs-string">"5fb29bd7056da90f1c12d2ba"</span>,
+          <span class="hljs-attr">"day"</span>: <span class="hljs-number">27</span>,
+          <span class="hljs-attr">"month"</span>: <span class="hljs-number">4</span>,
+          <span class="hljs-attr">"period"</span>: <span class="hljs-number">1</span>
+        },
+      ],
+      <span class="hljs-attr">"executions"</span>: [
+        {
+          <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2020-10-14T19:10:41.638Z"</span>,
+          <span class="hljs-attr">"period"</span>: <span class="hljs-number">-1</span>,
+          <span class="hljs-attr">"status"</span>: <span class="hljs-string">"failed"</span>,
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"cron"</span>,
+          <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"tYcVu21Yq"</span>,
+          <span class="hljs-attr">"reference"</span>: <span class="hljs-string">""</span>,
+          <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"ARS"</span>,
+          <span class="hljs-attr">"total"</span>: <span class="hljs-number">10</span>,
+          <span class="hljs-attr">"day"</span>: <span class="hljs-number">14</span>,
+          <span class="hljs-attr">"month"</span>: <span class="hljs-number">9</span>,
+          <span class="hljs-attr">"year"</span>: <span class="hljs-number">2020</span>,
+          <span class="hljs-attr">"subscription"</span>: <span class="hljs-string">"5ecdf1da4280640da2af0e73"</span>
+        },
+      ],
+      <span class="hljs-attr">"activeSource"</span>: {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Mastercard terminada en 1086"</span>,
+        <span class="hljs-attr">"cardNumber"</span>: <span class="hljs-string">"5210 11** **** 1234"</span>,
+        <span class="hljs-attr">"customer"</span>: <span class="hljs-string">""</span>
+      },
+      <span class="hljs-attr">"customer"</span>: {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Perez"</span>,
+        <span class="hljs-attr">"identification"</span>: <span class="hljs-string">"37941543"</span>,
+        <span class="hljs-attr">"email"</span>: <span class="hljs-string">"juanperez@mobbex.com"</span>
+      }
+    },
+    <span class="hljs-attr">"subscription"</span>: {
+      <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"7X_xtXiET"</span>,
+      <span class="hljs-attr">"type"</span>: <span class="hljs-string">"dynamic"</span>,
+      <span class="hljs-attr">"interval"</span>: <span class="hljs-string">"1m"</span>,
+      <span class="hljs-attr">"limit"</span>: <span class="hljs-number">12</span>,
+      <span class="hljs-attr">"trial"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"initialDay"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"shorten_url"</span>: <span class="hljs-string">"http://mbbx.co/cLFWFT5"</span>,
+      <span class="hljs-attr">"currency"</span>: <span class="hljs-string">"ARS"</span>,
+      <span class="hljs-attr">"status"</span>: <span class="hljs-string">"active"</span>,
+      <span class="hljs-attr">"customerForm"</span>: <span class="hljs-string">"default"</span>,
+      <span class="hljs-attr">"features"</span>: [],
+      <span class="hljs-attr">"sources"</span>: [],
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Pack X 12 meses"</span>,
+      <span class="hljs-attr">"description"</span>: <span class="hljs-string">"nn"</span>,
+      <span class="hljs-attr">"notes"</span>: <span class="hljs-string">""</span>,
+      <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"7X_xtXiET"</span>,
+      <span class="hljs-attr">"total"</span>: <span class="hljs-number">100</span>,
+      <span class="hljs-attr">"options"</span>: {
+        <span class="hljs-attr">"button"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"embed"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"domain"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-attr">"theme"</span>: {
+          <span class="hljs-attr">"type"</span>: <span class="hljs-string">"light"</span>,
+          <span class="hljs-attr">"background"</span>: <span class="hljs-string">""</span>,
+          <span class="hljs-attr">"showHeader"</span>: <span class="hljs-literal">true</span>,
+          <span class="hljs-attr">"showBack"</span>: <span class="hljs-literal">true</span>,
+          <span class="hljs-attr">"header"</span>: <span class="hljs-literal">false</span>,
+          <span class="hljs-attr">"colors"</span>: {
+            <span class="hljs-attr">"primary"</span>: <span class="hljs-string">"#6f00ff"</span>
+          }
+        }
+      }
+    },
+    <span class="hljs-attr">"entity"</span>: {
+      <span class="hljs-attr">"logo"</span>: {
+        <span class="hljs-attr">"filename"</span>: <span class="hljs-string">"def_store.jpg"</span>,
+        <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://s3.amazonaws.com/mobbex/files/images/522fb34a-2346-4aad-a78e-34470d9f1865.jpg"</span>,
+        <span class="hljs-attr">"mimetype"</span>: <span class="hljs-string">"image/jpeg"</span>,
+        <span class="hljs-attr">"extension"</span>: <span class="hljs-string">"jpg"</span>,
+        <span class="hljs-attr">"size"</span>: <span class="hljs-number">56943</span>,
+        <span class="hljs-attr">"width"</span>: <span class="hljs-number">600</span>,
+        <span class="hljs-attr">"height"</span>: <span class="hljs-number">600</span>,
+        <span class="hljs-attr">"sizes"</span>: [
+          <span class="hljs-string">"medium"</span>,
+          <span class="hljs-string">"small"</span>,
+          <span class="hljs-string">"square"</span>
+        ],
+        <span class="hljs-attr">"versions"</span>: [
+          <span class="hljs-string">"https://s3.amazonaws.com/mobbex/files/images/522fb34a-2346-4aad-a78e-34470d9f1865-medium.jpg"</span>,
+          <span class="hljs-string">"https://s3.amazonaws.com/mobbex/files/images/522fb34a-2346-4aad-a78e-34470d9f1865-small.jpg"</span>,
+        ]
+      },
+      <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"c22I3sb0r"</span>,
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"CUENTA TEST"</span>
+    },
+    <span class="hljs-attr">"total"</span>: <span class="hljs-number">100</span>,
+    <span class="hljs-attr">"currency"</span>: {
+      <span class="hljs-attr">"value"</span>: <span class="hljs-string">"ARS"</span>,
+      <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Peso Argentino"</span>,
+      <span class="hljs-attr">"symbol"</span>: <span class="hljs-string">"$"</span>,
+      <span class="hljs-attr">"hidden"</span>: <span class="hljs-literal">false</span>
+    },
+    <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://mobbex.com/p/subscriptions/7X_xtXiET/subscriber/SEIs_LPHA"</span>
+  }
+}
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="crear-suscriptor"></a><a href="#crear-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Crear Suscriptor</h3>
+<h4><a class="anchor" aria-hidden="true" id="url-y-método-8"></a><a href="#url-y-método-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
+<pre><code class="hljs css language-http">POST https://api.mobbex.com/p/subscriptions/{id}/subscriber
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-7"></a><a href="#parámetros-de-la-url-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
+<ul>
+<li><code>id</code>: ID de la Suscripción</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="json-body--post--2"></a><a href="#json-body--post--2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
 <ul>
 <li><code>customer</code>: Objecto con los datos del Cliente.</li>
 <li><code>customer.email</code>: Email del Cliente. Este parametro es Necesario.</li>
@@ -194,6 +392,7 @@
 <li><code>startDate</code>: Objecto con la fecha de inicio.</li>
 <li><code>startDate.day</code>: Dia de inicio de la suscripción</li>
 <li><code>startDate.month</code>: Mes de inicio de la suscripción.</li>
+<li><code>startDate.year</code>: Año de inicio de la suscripción ( Opcional ). Si no se provee se tomará el año corriente.</li>
 </ul>
 <h4><a class="anchor" aria-hidden="true" id="ejemplo"></a><a href="#ejemplo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ejemplo</h4>
 <pre><code class="hljs">{
@@ -209,7 +408,7 @@
     <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"demo_user_321"</span>
 }
 </code></pre>
-<h4><a class="anchor" aria-hidden="true" id="respuesta-1"></a><a href="#respuesta-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Respuesta</h4>
+<h4><a class="anchor" aria-hidden="true" id="respuesta-3"></a><a href="#respuesta-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Respuesta</h4>
 <pre><code class="hljs css language-json">{
     <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-attr">"data"</span>: {
@@ -228,57 +427,57 @@
 <li><code>subscriberUrl</code>: URL de Control del Suscriptor.</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="ver-suscriptor"></a><a href="#ver-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ver Suscriptor</h3>
-<h4><a class="anchor" aria-hidden="true" id="url-y-método-8"></a><a href="#url-y-método-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
-<pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}
-</code></pre>
-<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-7"></a><a href="#parámetros-de-la-url-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
-<ul>
-<li><code>id</code>: ID de la Suscripción</li>
-<li><code>sid</code>: ID del Suscriptor</li>
-</ul>
-<h3><a class="anchor" aria-hidden="true" id="editar-suscriptor"></a><a href="#editar-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Editar Suscriptor</h3>
 <h4><a class="anchor" aria-hidden="true" id="url-y-método-9"></a><a href="#url-y-método-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
-<pre><code class="hljs css language-http">POST https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}
+<pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-8"></a><a href="#parámetros-de-la-url-8" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 <li><code>sid</code>: ID del Suscriptor</li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="json-body--post--2"></a><a href="#json-body--post--2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
-<ul>
-<li><code>total</code>: Total específico a cobrar al suscriptor. (Opcional)</li>
-<li><code>reference</code>: Referencia del Suscriptor (Opcional)</li>
-</ul>
-<h3><a class="anchor" aria-hidden="true" id="suspender-suscriptor"></a><a href="#suspender-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Suspender Suscriptor</h3>
+<h3><a class="anchor" aria-hidden="true" id="editar-suscriptor"></a><a href="#editar-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Editar Suscriptor</h3>
 <h4><a class="anchor" aria-hidden="true" id="url-y-método-10"></a><a href="#url-y-método-10" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
-<pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/action/suspend
+<pre><code class="hljs css language-http">POST https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-9"></a><a href="#parámetros-de-la-url-9" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 <li><code>sid</code>: ID del Suscriptor</li>
 </ul>
-<h3><a class="anchor" aria-hidden="true" id="activar-suscriptor"></a><a href="#activar-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Activar Suscriptor</h3>
+<h4><a class="anchor" aria-hidden="true" id="json-body--post--3"></a><a href="#json-body--post--3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
+<ul>
+<li><code>total</code>: Total específico a cobrar al suscriptor. (Opcional)</li>
+<li><code>reference</code>: Referencia del Suscriptor (Opcional)</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="suspender-suscriptor"></a><a href="#suspender-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Suspender Suscriptor</h3>
 <h4><a class="anchor" aria-hidden="true" id="url-y-método-11"></a><a href="#url-y-método-11" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
-<pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/action/activate
+<pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/action/suspend
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-10"></a><a href="#parámetros-de-la-url-10" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 <li><code>sid</code>: ID del Suscriptor</li>
 </ul>
-<h3><a class="anchor" aria-hidden="true" id="cambiar-agenda-del-suscriptor"></a><a href="#cambiar-agenda-del-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cambiar Agenda del Suscriptor</h3>
-<p>Esta acción re-generará toda la agenda del suscriptor basado en la fecha de inicio indicada.</p>
+<h3><a class="anchor" aria-hidden="true" id="activar-suscriptor"></a><a href="#activar-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Activar Suscriptor</h3>
 <h4><a class="anchor" aria-hidden="true" id="url-y-método-12"></a><a href="#url-y-método-12" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
-<pre><code class="hljs css language-http">POST https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/action/reschedule
+<pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/action/activate
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-11"></a><a href="#parámetros-de-la-url-11" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 <li><code>sid</code>: ID del Suscriptor</li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="json-body--post--3"></a><a href="#json-body--post--3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
+<h3><a class="anchor" aria-hidden="true" id="cambiar-agenda-del-suscriptor"></a><a href="#cambiar-agenda-del-suscriptor" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cambiar Agenda del Suscriptor</h3>
+<p>Esta acción re-generará toda la agenda del suscriptor basado en la fecha de inicio indicada.</p>
+<h4><a class="anchor" aria-hidden="true" id="url-y-método-13"></a><a href="#url-y-método-13" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
+<pre><code class="hljs css language-http">POST https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/action/reschedule
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-12"></a><a href="#parámetros-de-la-url-12" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
+<ul>
+<li><code>id</code>: ID de la Suscripción</li>
+<li><code>sid</code>: ID del Suscriptor</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="json-body--post--4"></a><a href="#json-body--post--4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
 <ul>
 <li><code>startDate</code>: Objecto con la fecha de inicio.</li>
 <li><code>startDate.day</code>: Dia de inicio de la suscripción</li>
@@ -294,58 +493,76 @@
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="mover-suscriptor-a-otra-suscripción"></a><a href="#mover-suscriptor-a-otra-suscripción" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mover Suscriptor a otra Suscripción</h3>
 <p>Tenga en cuenta que sólo se podrá mover un suscriptor a otra suscripción dentro de la misma entidad. Durante el proceso de mover al suscriptor la agenda del mismo será recalculada cuando la suscripción sea &quot;dynamic&quot;</p>
-<h4><a class="anchor" aria-hidden="true" id="url-y-método-13"></a><a href="#url-y-método-13" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
+<h4><a class="anchor" aria-hidden="true" id="url-y-método-14"></a><a href="#url-y-método-14" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
 <pre><code class="hljs css language-http">POST https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/action/move
 </code></pre>
-<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-12"></a><a href="#parámetros-de-la-url-12" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
+<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-13"></a><a href="#parámetros-de-la-url-13" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 <li><code>sid</code>: ID del Suscriptor</li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="json-body--post--4"></a><a href="#json-body--post--4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
+<h4><a class="anchor" aria-hidden="true" id="json-body--post--5"></a><a href="#json-body--post--5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
 <ul>
 <li><code>sid</code>: ID de la nueva suscripción</li>
 </ul>
+<h3><a class="anchor" aria-hidden="true" id="agendar-un-cobro-futuro"></a><a href="#agendar-un-cobro-futuro" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Agendar un Cobro Futuro</h3>
+<p>Tenga en cuenta que sólo se podrá mover un suscriptor a otra suscripción dentro de la misma entidad. Durante el proceso de mover al suscriptor la agenda del mismo será recalculada cuando la suscripción sea &quot;dynamic&quot;</p>
+<h4><a class="anchor" aria-hidden="true" id="url-y-método-15"></a><a href="#url-y-método-15" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
+<pre><code class="hljs css language-http">POST https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/action/schedule
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-14"></a><a href="#parámetros-de-la-url-14" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
+<ul>
+<li><code>id</code>: ID de la Suscripción</li>
+<li><code>sid</code>: ID del Suscriptor</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="json-body--post--6"></a><a href="#json-body--post--6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
+<ul>
+<li><code>date</code>: Objecto con la fecha de inicio.</li>
+<li><code>date.day</code>: Dia de inicio de la suscripción</li>
+<li><code>date.month</code>: Mes de inicio de la suscripción.</li>
+<li><code>date.year</code>: Año de inicio de la suscripción ( Opcional ). Si no se provee se tomará el año corriente.</li>
+<li><code>total</code>: Total específico a cobrar al suscriptor. Este campo es opcional. Si no se envia se cobrará el monto asignado al Suscriptor ( Monto personalizado por Suscriptor ) o el monto de la Suscripción.</li>
+</ul>
 <h2><a class="anchor" aria-hidden="true" id="ejecuciones"></a><a href="#ejecuciones" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ejecuciones</h2>
 <h3><a class="anchor" aria-hidden="true" id="reintentar-una-ejecución"></a><a href="#reintentar-una-ejecución" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reintentar una Ejecución</h3>
-<h4><a class="anchor" aria-hidden="true" id="url-y-método-14"></a><a href="#url-y-método-14" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
+<h4><a class="anchor" aria-hidden="true" id="url-y-método-16"></a><a href="#url-y-método-16" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
 <pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/execution/{eid}/retry
 </code></pre>
-<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-13"></a><a href="#parámetros-de-la-url-13" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
+<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-15"></a><a href="#parámetros-de-la-url-15" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 <li><code>sid</code>: ID del Suscriptor</li>
 <li><code>eid</code>: ID de la Ejecución</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="marcar-una-ejecución-como-paga"></a><a href="#marcar-una-ejecución-como-paga" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Marcar una Ejecución como Paga</h3>
-<h4><a class="anchor" aria-hidden="true" id="url-y-método-15"></a><a href="#url-y-método-15" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
+<h4><a class="anchor" aria-hidden="true" id="url-y-método-17"></a><a href="#url-y-método-17" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
 <pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/execution/{eid}/paid
 </code></pre>
-<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-14"></a><a href="#parámetros-de-la-url-14" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
+<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-16"></a><a href="#parámetros-de-la-url-16" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 <li><code>sid</code>: ID del Suscriptor</li>
 <li><code>eid</code>: ID de la Ejecución</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="ejecutar-suscripción-manualmente"></a><a href="#ejecutar-suscripción-manualmente" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ejecutar Suscripción Manualmente</h3>
-<h4><a class="anchor" aria-hidden="true" id="url-y-método-16"></a><a href="#url-y-método-16" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
+<h4><a class="anchor" aria-hidden="true" id="url-y-método-18"></a><a href="#url-y-método-18" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
 <pre><code class="hljs css language-http">GET https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/execution
 </code></pre>
-<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-15"></a><a href="#parámetros-de-la-url-15" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
+<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-17"></a><a href="#parámetros-de-la-url-17" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 <li><code>sid</code>: ID del Suscriptor</li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="ejecutar-suscripción-manualmente-con-monto-diferenciado"></a><a href="#ejecutar-suscripción-manualmente-con-monto-diferenciado" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ejecutar Suscripción Manualmente con Monto Diferenciado</h3>
-<h4><a class="anchor" aria-hidden="true" id="url-y-método-17"></a><a href="#url-y-método-17" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
+<h4><a class="anchor" aria-hidden="true" id="url-y-método-19"></a><a href="#url-y-método-19" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>URL y Método:</h4>
 <pre><code class="hljs css language-http">POST https://api.mobbex.com/p/subscriptions/{id}/subscriber/{sid}/execution
 </code></pre>
-<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-16"></a><a href="#parámetros-de-la-url-16" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
+<h4><a class="anchor" aria-hidden="true" id="parámetros-de-la-url-18"></a><a href="#parámetros-de-la-url-18" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Parámetros de la URL</h4>
 <ul>
 <li><code>id</code>: ID de la Suscripción</li>
 <li><code>sid</code>: ID del Suscriptor</li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="json-body--post--5"></a><a href="#json-body--post--5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
+<h4><a class="anchor" aria-hidden="true" id="json-body--post--7"></a><a href="#json-body--post--7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSON Body ( POST )</h4>
 <ul>
 <li><code>total</code>: Total específico a cobrar al suscriptor. Este campo es opcional. Si no se envia se cobrará el monto asignado al Suscriptor ( Monto personalizado por Suscriptor ) o el monto de la Suscripción.</li>
 <li><code>reference</code>: Referencia del Cobro a Ejecutar. Esta referencia deberá ser única. ( Opcional )</li>
@@ -357,120 +574,168 @@
 <pre><code class="hljs">{
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"subscription:registration"</span>,
     <span class="hljs-attr">"data"</span>: {
-         <span class="hljs-attr">"payment"</span>: {
-            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"rkWpX3YU6x"</span>,
+        <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"view"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>
+        },
+        <span class="hljs-attr">"payment"</span>: {
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"ABABBB78798"</span>,
+            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Esto es un registro!"</span>,
             <span class="hljs-attr">"operation"</span>: {
-                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"payment"</span>
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"validation"</span>
             },
             <span class="hljs-attr">"status"</span>: {
                 <span class="hljs-attr">"code"</span>: <span class="hljs-string">"200"</span>,
-                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Paid"</span>,
-                <span class="hljs-attr">"message"</span>: <span class="hljs-string">"APROBADA"</span>
+                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Aprobado"</span>,
+                <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Transacción Aprobada"</span>
             },
-            <span class="hljs-attr">"total"</span>: <span class="hljs-number">1907.5</span>,
+            <span class="hljs-attr">"total"</span>: <span class="hljs-number">14.3</span>,
             <span class="hljs-attr">"currency"</span>: {
                 <span class="hljs-attr">"code"</span>: <span class="hljs-string">"ARS"</span>,
-                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Peso Argentino"</span>
+                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Peso Argentino"</span>,
+                <span class="hljs-attr">"symbol"</span>: <span class="hljs-string">"$"</span>
             },
-            <span class="hljs-attr">"currency_data"</span>: {
-                <span class="hljs-attr">"value"</span>: <span class="hljs-string">"ARS"</span>,
-                <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Peso Argentino"</span>,
-                <span class="hljs-attr">"symbol"</span>: <span class="hljs-string">"$"</span>,
-                <span class="hljs-attr">"hidden"</span>: <span class="hljs-literal">false</span>
+            <span class="hljs-attr">"riskAnalysis"</span>: {
+                <span class="hljs-attr">"band"</span>: <span class="hljs-string">"N/A"</span>,
+                <span class="hljs-attr">"level"</span>: <span class="hljs-string">"N/A"</span>
             },
+            <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2020-12-02T18:12:11.122Z"</span>,
+            <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2020-12-02T18:12:12.768Z"</span>,
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"extenal_reference"</span>,
             <span class="hljs-attr">"source"</span>: {
-                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Visa"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Visa Débito"</span>,
                 <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>,
-                <span class="hljs-attr">"number"</span>: <span class="hljs-string">"454642xxxxxx7787"</span>,
+                <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"visa.debit"</span>,
+                <span class="hljs-attr">"number"</span>: <span class="hljs-string">"4515 00** **** 1234"</span>,
+                <span class="hljs-attr">"expiration"</span>: {
+                    <span class="hljs-attr">"month"</span>: <span class="hljs-string">"01"</span>,
+                    <span class="hljs-attr">"year"</span>: <span class="hljs-string">"26"</span>
+                },
                 <span class="hljs-attr">"installment"</span>: {
-                    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"1 Cuotas"</span>,
-                    <span class="hljs-attr">"amount"</span>: <span class="hljs-number">500</span>,
-                    <span class="hljs-attr">"count"</span>: <span class="hljs-number">1</span>
+                    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Débito"</span>,
+                    <span class="hljs-attr">"amount"</span>: <span class="hljs-number">14.3</span>,
+                    <span class="hljs-attr">"count"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"1"</span>
                 }
-            },
-            <span class="hljs-attr">"user"</span>: {
-                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Batman"</span>,
-                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"soybatman@gmail.com"</span>
-            },
-            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"HyjdiK8Tx"</span>
+            }
+        },
+        <span class="hljs-attr">"entity"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Demo Entity"</span>,
+            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"demo_entity"</span>
+        },
+        <span class="hljs-attr">"user"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Perez Wayne"</span>,
+            <span class="hljs-attr">"email"</span>: <span class="hljs-string">"juan.perez@mimail.com"</span>
+        },
+        <span class="hljs-attr">"source"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Visa Débito"</span>,
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>,
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"visa.debit"</span>
         },
         <span class="hljs-attr">"subscription"</span>: {
-            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"JmfI3Ml3D"</span>,
+            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"DRXR14KIUC4V8TFBRL"</span>,
             <span class="hljs-attr">"interval"</span>: <span class="hljs-string">"1m"</span>,
-            <span class="hljs-attr">"limit"</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Nombre de la Suscripción"</span>,
-            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Descripción de la Suscripción"</span>,
-            <span class="hljs-attr">"total"</span>: <span class="hljs-number">500</span>
+            <span class="hljs-attr">"limit"</span>: <span class="hljs-number">4</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"El nombre de mi suscripción"</span>,
+            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Esto es GENIAL"</span>,
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"external_reference"</span>,
+            <span class="hljs-attr">"total"</span>: <span class="hljs-number">1595</span>
         },
         <span class="hljs-attr">"subscriber"</span>: {
-            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"qy82noStM"</span>,
-            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"qy82noStM"</span>,
+            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"RLY80US2JZ8ZHTSCPH"</span>,
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"3447"</span>,
             <span class="hljs-attr">"customer"</span>: {
-                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Batman"</span>,
-                <span class="hljs-attr">"identification"</span>: <span class="hljs-string">"999999"</span>,
-                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"soybatman@gmail.com"</span>
+                <span class="hljs-attr">"identification"</span>: <span class="hljs-string">"12123123"</span>,
+                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"juan.perez@mimail.com"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Perez Wayne"</span>
             }
-        }
+        },
+        <span class="hljs-attr">"execution"</span>: {}
     }
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="cambio-de-método-de-pago"></a><a href="#cambio-de-método-de-pago" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cambio de Método de Pago</h3>
 <pre><code class="hljs">{
-    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"subscription:change_source"</span>,
-    <span class="hljs-attr">"data"</span>: {
-         <span class="hljs-attr">"payment"</span>: {
-            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"rkWpX3YU6x"</span>,
-            <span class="hljs-attr">"operation"</span>: {
-                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"payment"</span>
+    <span class="hljs-comment">"type"</span>: <span class="hljs-comment">"subscription:change_source"</span>,
+    <span class="hljs-comment">"data"</span>: {
+            <span class="hljs-comment">"result"</span>: <span class="hljs-keyword">true</span>,
+            <span class="hljs-comment">"view"</span>: {
+                <span class="hljs-comment">"type"</span>: <span class="hljs-comment">"card"</span>
             },
-            <span class="hljs-attr">"status"</span>: {
-                <span class="hljs-attr">"code"</span>: <span class="hljs-string">"200"</span>,
-                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Paid"</span>,
-                <span class="hljs-attr">"message"</span>: <span class="hljs-string">"APROBADA"</span>
-            },
-            <span class="hljs-attr">"total"</span>: <span class="hljs-number">1907.5</span>,
-            <span class="hljs-attr">"currency"</span>: {
-                <span class="hljs-attr">"code"</span>: <span class="hljs-string">"ARS"</span>,
-                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Peso Argentino"</span>
-            },
-            <span class="hljs-attr">"currency_data"</span>: {
-                <span class="hljs-attr">"value"</span>: <span class="hljs-string">"ARS"</span>,
-                <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Peso Argentino"</span>,
-                <span class="hljs-attr">"symbol"</span>: <span class="hljs-string">"$"</span>,
-                <span class="hljs-attr">"hidden"</span>: <span class="hljs-literal">false</span>
-            },
-            <span class="hljs-attr">"source"</span>: {
-                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Visa"</span>,
-                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>,
-                <span class="hljs-attr">"number"</span>: <span class="hljs-string">"454642xxxxxx7787"</span>,
-                <span class="hljs-attr">"installment"</span>: {
-                    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"1 Cuotas"</span>,
-                    <span class="hljs-attr">"amount"</span>: <span class="hljs-number">500</span>,
-                    <span class="hljs-attr">"count"</span>: <span class="hljs-number">1</span>
+            <span class="hljs-comment">"payment"</span>: {
+                <span class="hljs-comment">"id"</span>: <span class="hljs-comment">"ABC123123"</span>,
+                <span class="hljs-comment">"description"</span>: <span class="hljs-comment">"Validación de Tarjeta."</span>,
+                <span class="hljs-comment">"operation"</span>: {
+                    <span class="hljs-comment">"type"</span>: <span class="hljs-comment">"validation"</span>
+                },
+                <span class="hljs-comment">"status"</span>: {
+                    <span class="hljs-comment">"code"</span>: <span class="hljs-comment">"410"</span>,
+                    <span class="hljs-comment">"text"</span>: <span class="hljs-comment">"Denegada, Fondos insuficientes"</span>,
+                    <span class="hljs-comment">"message"</span>: <span class="hljs-comment">"Denegada, fondos insuficientes. (Cod. 51)"</span>
+                },
+                <span class="hljs-comment">"total"</span>: <span class="hljs-number">17.15</span>,
+                <span class="hljs-comment">"currency"</span>: {
+                    <span class="hljs-comment">"code"</span>: <span class="hljs-comment">"ARS"</span>,
+                    <span class="hljs-comment">"text"</span>: <span class="hljs-comment">"Peso Argentino"</span>,
+                    <span class="hljs-comment">"symbol"</span>: <span class="hljs-comment">"$"</span>
+                },
+                <span class="hljs-comment">"riskAnalysis"</span>: {
+                    <span class="hljs-comment">"band"</span>: <span class="hljs-comment">"N/A"</span>,
+                    <span class="hljs-comment">"level"</span>: <span class="hljs-comment">"N/A"</span>
+                },
+                <span class="hljs-comment">"created"</span>: <span class="hljs-comment">"2020-12-02T11:31:56.544Z"</span>,
+                <span class="hljs-comment">"updated"</span>: <span class="hljs-comment">"2020-12-02T11:31:58.243Z"</span>,
+                <span class="hljs-comment">"reference"</span>: <span class="hljs-comment">"external_reference"</span>,
+                <span class="hljs-comment">"source"</span>: {
+                    <span class="hljs-comment">"name"</span>: <span class="hljs-comment">"Visa"</span>,
+                    <span class="hljs-comment">"type"</span>: <span class="hljs-comment">"card"</span>,
+                    <span class="hljs-comment">"reference"</span>: <span class="hljs-comment">"visa"</span>,
+                    <span class="hljs-comment">"number"</span>: <span class="hljs-comment">"4515 00** **** 1234"</span>,
+                    <span class="hljs-comment">"expiration"</span>: {
+                        <span class="hljs-comment">"month"</span>: <span class="hljs-comment">"01"</span>,
+                        <span class="hljs-comment">"year"</span>: <span class="hljs-comment">"24"</span>
+                    },
+                    <span class="hljs-comment">"installment"</span>: {
+                        <span class="hljs-comment">"description"</span>: <span class="hljs-comment">"1 Cuota"</span>,
+                        <span class="hljs-comment">"amount"</span>: <span class="hljs-number">17.15</span>,
+                        <span class="hljs-comment">"count"</span>: <span class="hljs-number">1</span>,
+                        <span class="hljs-comment">"reference"</span>: <span class="hljs-comment">"1"</span>
+                    }
                 }
             },
-            <span class="hljs-attr">"user"</span>: {
-                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Batman"</span>,
-                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"soybatman@gmail.com"</span>
+            <span class="hljs-comment">"entity"</span>: {
+                <span class="hljs-comment">"name"</span>: <span class="hljs-comment">"Demo Entity"</span>,
+                <span class="hljs-comment">"uid"</span>: <span class="hljs-comment">"demo_entity"</span>
             },
-            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"HyjdiK8Tx"</span>
-        },
-        <span class="hljs-attr">"subscription"</span>: {
-            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"JmfI3Ml3D"</span>,
-            <span class="hljs-attr">"interval"</span>: <span class="hljs-string">"1m"</span>,
-            <span class="hljs-attr">"limit"</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Nombre de la Suscripción"</span>,
-            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Descripción de la Suscripción"</span>,
-            <span class="hljs-attr">"total"</span>: <span class="hljs-number">500</span>
-        },
-        <span class="hljs-attr">"subscriber"</span>: {
-            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"qy82noStM"</span>,
-            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"qy82noStM"</span>,
-            <span class="hljs-attr">"customer"</span>: {
-                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Batman"</span>,
-                <span class="hljs-attr">"identification"</span>: <span class="hljs-string">"999999"</span>,
-                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"soybatman@gmail.com"</span>
-            }
+            <span class="hljs-comment">"user"</span>: {
+                <span class="hljs-comment">"name"</span>: <span class="hljs-comment">"Juan Perez Wayne"</span>,
+                <span class="hljs-comment">"email"</span>: <span class="hljs-comment">"juan.perez@mimail.com"</span>
+            },
+            <span class="hljs-comment">"source"</span>: {
+                <span class="hljs-comment">"name"</span>: <span class="hljs-comment">"Visa"</span>,
+                <span class="hljs-comment">"type"</span>: <span class="hljs-comment">"card"</span>,
+                <span class="hljs-comment">"reference"</span>: <span class="hljs-comment">"visa"</span>
+            },
+            <span class="hljs-comment">"subscription"</span>: {
+                <span class="hljs-comment">"uid"</span>: <span class="hljs-comment">"4546465465465"</span>,
+                <span class="hljs-comment">"interval"</span>: <span class="hljs-comment">"1m"</span>,
+                <span class="hljs-comment">"limit"</span>: <span class="hljs-number">0</span>,
+                <span class="hljs-comment">"name"</span>: <span class="hljs-comment">"Mi Suscripción"</span>,
+                <span class="hljs-comment">"description"</span>: <span class="hljs-comment">"Débitos automáticos? Todavía existe eso?"</span>,
+                <span class="hljs-comment">"reference"</span>: <span class="hljs-comment">"external_reference"</span>,
+                <span class="hljs-comment">"total"</span>: <span class="hljs-number">8000.14</span>
+            },
+            <span class="hljs-comment">"subscriber"</span>: {
+                <span class="hljs-comment">"uid"</span>: <span class="hljs-comment">"Fvon4enAv5"</span>,
+                <span class="hljs-comment">"reference"</span>: <span class="hljs-comment">"5defe0af-e9be-4288-bed1-423a5cc41920"</span>,
+                <span class="hljs-comment">"customer"</span>: {
+                    <span class="hljs-comment">"email"</span>: <span class="hljs-comment">"juan.perez@mimail.com"</span>,
+                    <span class="hljs-comment">"name"</span>: <span class="hljs-comment">"Juan Perez Wayne"</span>,
+                    <span class="hljs-comment">"identification"</span>: <span class="hljs-comment">"12123123"</span>,
+                    <span class="hljs-comment">"phone"</span>: <span class="hljs-comment">"1112341234"</span>
+                }
+            },
+            <span class="hljs-comment">"execution"</span>: {}
         }
     }
 }
@@ -481,63 +746,84 @@
     <span class="hljs-attr">"type"</span>: <span class="hljs-string">"subscription:execution"</span>,
     <span class="hljs-attr">"data"</span>: {
         <span class="hljs-attr">"result"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"view"</span>: {
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>
+        },
         <span class="hljs-attr">"payment"</span>: {
-            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"rkWpX3YU6x"</span>,
+            <span class="hljs-attr">"id"</span>: <span class="hljs-string">"ABC121232"</span>,
+            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Cobro Ejecutado"</span>,
             <span class="hljs-attr">"operation"</span>: {
-                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"payment"</span>
+                <span class="hljs-attr">"type"</span>: <span class="hljs-string">"payment.v2"</span>
             },
             <span class="hljs-attr">"status"</span>: {
-                <span class="hljs-attr">"code"</span>: <span class="hljs-string">"200"</span>,
-                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Paid"</span>,
-                <span class="hljs-attr">"message"</span>: <span class="hljs-string">"APROBADA"</span>
+                <span class="hljs-attr">"code"</span>: <span class="hljs-string">"410"</span>,
+                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Denegada, Fondos insuficientes"</span>,
+                <span class="hljs-attr">"message"</span>: <span class="hljs-string">"Denegada, fondos insuficientes. (Cod. 51)"</span>
             },
-            <span class="hljs-attr">"total"</span>: <span class="hljs-number">1907.5</span>,
+            <span class="hljs-attr">"total"</span>: <span class="hljs-number">1533.11</span>,
             <span class="hljs-attr">"currency"</span>: {
                 <span class="hljs-attr">"code"</span>: <span class="hljs-string">"ARS"</span>,
-                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Peso Argentino"</span>
+                <span class="hljs-attr">"text"</span>: <span class="hljs-string">"Peso Argentino"</span>,
+                <span class="hljs-attr">"symbol"</span>: <span class="hljs-string">"$"</span>
             },
-            <span class="hljs-attr">"currency_data"</span>: {
-                <span class="hljs-attr">"value"</span>: <span class="hljs-string">"ARS"</span>,
-                <span class="hljs-attr">"label"</span>: <span class="hljs-string">"Peso Argentino"</span>,
-                <span class="hljs-attr">"symbol"</span>: <span class="hljs-string">"$"</span>,
-                <span class="hljs-attr">"hidden"</span>: <span class="hljs-literal">false</span>
+            <span class="hljs-attr">"riskAnalysis"</span>: {
+                <span class="hljs-attr">"band"</span>: <span class="hljs-string">"N/A"</span>,
+                <span class="hljs-attr">"level"</span>: <span class="hljs-string">"N/A"</span>
             },
+            <span class="hljs-attr">"created"</span>: <span class="hljs-string">"2020-12-02T01:00:55.994Z"</span>,
+            <span class="hljs-attr">"updated"</span>: <span class="hljs-string">"2020-12-02T01:00:57.091Z"</span>,
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"external_reference"</span>,
             <span class="hljs-attr">"source"</span>: {
-                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Visa"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Visa Débito"</span>,
                 <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>,
-                <span class="hljs-attr">"number"</span>: <span class="hljs-string">"454642xxxxxx7787"</span>,
+                <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"visa.debit"</span>,
+                <span class="hljs-attr">"number"</span>: <span class="hljs-string">"4515 00** **** 1234"</span>,
+                <span class="hljs-attr">"expiration"</span>: {
+                    <span class="hljs-attr">"month"</span>: <span class="hljs-string">"02"</span>,
+                    <span class="hljs-attr">"year"</span>: <span class="hljs-string">"26"</span>
+                },
                 <span class="hljs-attr">"installment"</span>: {
-                    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"1 Cuotas"</span>,
-                    <span class="hljs-attr">"amount"</span>: <span class="hljs-number">500</span>,
-                    <span class="hljs-attr">"count"</span>: <span class="hljs-number">1</span>
+                    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Débito"</span>,
+                    <span class="hljs-attr">"amount"</span>: <span class="hljs-number">1546.55</span>,
+                    <span class="hljs-attr">"count"</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"1"</span>
                 }
-            },
-            <span class="hljs-attr">"user"</span>: {
-                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Batman"</span>,
-                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"soybatman@gmail.com"</span>
-            },
-            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"HyjdiK8Tx"</span>
+            }
+        },
+        <span class="hljs-attr">"entity"</span>: {
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Demo Entity"</span>,
+                <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"demo_entity"</span>
+        },
+        <span class="hljs-attr">"user"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Perez Wayne"</span>,
+            <span class="hljs-attr">"email"</span>: <span class="hljs-string">"juan.perez@mimail.com"</span>
+        },
+        <span class="hljs-attr">"source"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Visa Débito"</span>,
+            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"card"</span>,
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"visa.debit"</span>
         },
         <span class="hljs-attr">"subscription"</span>: {
-            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"JmfI3Ml3D"</span>,
+            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"fdSxU7RbC"</span>,
             <span class="hljs-attr">"interval"</span>: <span class="hljs-string">"1m"</span>,
-            <span class="hljs-attr">"limit"</span>: <span class="hljs-number">0</span>,
-            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Nombre de la Suscripción"</span>,
-            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Descripción de la Suscripción"</span>,
-            <span class="hljs-attr">"total"</span>: <span class="hljs-number">500</span>
+            <span class="hljs-attr">"limit"</span>: <span class="hljs-number">5</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Mi Suscripción"</span>,
+            <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Dinosaurios"</span>,
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"external_reference"</span>,
+            <span class="hljs-attr">"total"</span>: <span class="hljs-number">1547</span>
         },
         <span class="hljs-attr">"subscriber"</span>: {
-            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"qy82noStM"</span>,
-            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"qy82noStM"</span>,
-            <span class="hljs-attr">"period"</span>: <span class="hljs-number">3</span>,
+            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"CBA456456"</span>,
+            <span class="hljs-attr">"reference"</span>: <span class="hljs-string">"exernal_reference"</span>,
+            <span class="hljs-attr">"period"</span>: <span class="hljs-number">-1</span>,
             <span class="hljs-attr">"customer"</span>: {
-                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Batman"</span>,
-                <span class="hljs-attr">"identification"</span>: <span class="hljs-string">"999999"</span>,
-                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"soybatman@gmail.com"</span>
+                <span class="hljs-attr">"identification"</span>: <span class="hljs-string">"123123132"</span>,
+                <span class="hljs-attr">"email"</span>: <span class="hljs-string">"juan.perez@mimail.com"</span>,
+                <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Juan Perez Wayne"</span>
             }
-        }
-        <span class="hljs-string">"execution"</span>: {
-            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"xjs0fu~fK"</span>
+        },
+        <span class="hljs-attr">"execution"</span>: {
+            <span class="hljs-attr">"uid"</span>: <span class="hljs-string">"54Z45DRXEZ01QWYLUL"</span>
         }
     }
 }
@@ -590,4 +876,4 @@
     }
 }
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/payment_orders"><span class="arrow-prev">← </span><span>Ordenes de Pago</span></a><a class="docs-next button" href="/docs/payment_methods"><span>Métodos de Pago y Cuotas</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#creaciónedición">Creación/Edición</a></li><li><a href="#suscripciones">Suscripciones</a><ul class="toc-headings"><li><a href="#obtener-suscripciones">Obtener Suscripciones</a></li><li><a href="#filtrar-suscripciones-por-página">Filtrar Suscripciones por página</a></li><li><a href="#obtener-suscripción">Obtener Suscripción</a></li><li><a href="#activar-suscripción">Activar Suscripción</a></li><li><a href="#eliminar-suscripción">Eliminar Suscripción</a></li></ul></li><li><a href="#suscriptores">Suscriptores</a><ul class="toc-headings"><li><a href="#obtener-suscriptores">Obtener Suscriptores</a></li><li><a href="#crear-suscriptor">Crear Suscriptor</a></li><li><a href="#ver-suscriptor">Ver Suscriptor</a></li><li><a href="#editar-suscriptor">Editar Suscriptor</a></li><li><a href="#suspender-suscriptor">Suspender Suscriptor</a></li><li><a href="#activar-suscriptor">Activar Suscriptor</a></li><li><a href="#cambiar-agenda-del-suscriptor">Cambiar Agenda del Suscriptor</a></li><li><a href="#mover-suscriptor-a-otra-suscripción">Mover Suscriptor a otra Suscripción</a></li></ul></li><li><a href="#ejecuciones">Ejecuciones</a><ul class="toc-headings"><li><a href="#reintentar-una-ejecución">Reintentar una Ejecución</a></li><li><a href="#marcar-una-ejecución-como-paga">Marcar una Ejecución como Paga</a></li><li><a href="#ejecutar-suscripción-manualmente">Ejecutar Suscripción Manualmente</a></li><li><a href="#ejecutar-suscripción-manualmente-con-monto-diferenciado">Ejecutar Suscripción Manualmente con Monto Diferenciado</a></li></ul></li><li><a href="#webhooks">WebHooks</a><ul class="toc-headings"><li><a href="#nueva-suscripción">Nueva Suscripción</a></li><li><a href="#cambio-de-método-de-pago">Cambio de Método de Pago</a></li><li><a href="#suscripción-ejecutada">Suscripción Ejecutada</a></li><li><a href="#suscriptor-suspendido">Suscriptor Suspendido</a></li><li><a href="#suscriptor-activado">Suscriptor Activado</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/mobbex.png" alt="Mobbex {DEV}" width="58" height="52"/></a><div><h5>Documentación</h5><a href="/docs/getting-started">Comenzá ahora</a><a href="/docs/checkout">Checkout</a><a href="/docs/payment_orders">Ordenes de Pago</a><a href="/docs/mobbex_button">Botón Mobbex</a><a href="/docs/ecommerce">Plugins para Ecommerce</a></div><div><h5>Sobre Mobbex</h5><a href="https://mobbex.com/console" target="_blank" rel="noreferrer noopener">Usuarios y Registro</a><a href="https://www.mobbex.com/comoseusa/" target="_blank" rel="noreferrer noopener">Cómo se usa?</a><a href="https://www.mobbex.com/contactanos/" target="_blank" rel="noreferrer noopener">Contactanos</a><a href="https://twitter.com/mobbex" target="_blank" rel="noreferrer noopener">Encontranos en Twitter</a></div><div><h5>Más</h5><a href="/blog">Blog</a><a href="https://github.com/mobbexco">GitHub</a></div></section><a href="https://www.mobbex.com" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Mobbex Argentina SRL</section></footer></div><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/payment_orders"><span class="arrow-prev">← </span><span>Ordenes de Pago</span></a><a class="docs-next button" href="/docs/payment_methods"><span>Métodos de Pago y Cuotas</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#creaciónedición">Creación/Edición</a></li><li><a href="#suscripciones">Suscripciones</a><ul class="toc-headings"><li><a href="#obtener-suscripciones">Obtener Suscripciones</a></li><li><a href="#filtrar-suscripciones-por-página">Filtrar Suscripciones por página</a></li><li><a href="#obtener-suscripción">Obtener Suscripción</a></li><li><a href="#activar-suscripción">Activar Suscripción</a></li><li><a href="#eliminar-suscripción">Eliminar Suscripción</a></li><li><a href="#ejecutar-cobros-manuales-masivamente">Ejecutar cobros manuales masivamente</a></li></ul></li><li><a href="#suscriptores">Suscriptores</a><ul class="toc-headings"><li><a href="#obtener-suscriptores">Obtener Suscriptores</a></li><li><a href="#crear-suscriptor">Crear Suscriptor</a></li><li><a href="#ver-suscriptor">Ver Suscriptor</a></li><li><a href="#editar-suscriptor">Editar Suscriptor</a></li><li><a href="#suspender-suscriptor">Suspender Suscriptor</a></li><li><a href="#activar-suscriptor">Activar Suscriptor</a></li><li><a href="#cambiar-agenda-del-suscriptor">Cambiar Agenda del Suscriptor</a></li><li><a href="#mover-suscriptor-a-otra-suscripción">Mover Suscriptor a otra Suscripción</a></li><li><a href="#agendar-un-cobro-futuro">Agendar un Cobro Futuro</a></li></ul></li><li><a href="#ejecuciones">Ejecuciones</a><ul class="toc-headings"><li><a href="#reintentar-una-ejecución">Reintentar una Ejecución</a></li><li><a href="#marcar-una-ejecución-como-paga">Marcar una Ejecución como Paga</a></li><li><a href="#ejecutar-suscripción-manualmente">Ejecutar Suscripción Manualmente</a></li><li><a href="#ejecutar-suscripción-manualmente-con-monto-diferenciado">Ejecutar Suscripción Manualmente con Monto Diferenciado</a></li></ul></li><li><a href="#webhooks">WebHooks</a><ul class="toc-headings"><li><a href="#nueva-suscripción">Nueva Suscripción</a></li><li><a href="#cambio-de-método-de-pago">Cambio de Método de Pago</a></li><li><a href="#suscripción-ejecutada">Suscripción Ejecutada</a></li><li><a href="#suscriptor-suspendido">Suscriptor Suspendido</a></li><li><a href="#suscriptor-activado">Suscriptor Activado</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/mobbex.png" alt="Mobbex {DEV}" width="58" height="52"/></a><div><h5>Documentación</h5><a href="/docs/getting-started">Comenzá ahora</a><a href="/docs/checkout">Checkout</a><a href="/docs/payment_orders">Ordenes de Pago</a><a href="/docs/mobbex_button">Botón Mobbex</a><a href="/docs/ecommerce">Plugins para Ecommerce</a></div><div><h5>Sobre Mobbex</h5><a href="https://mobbex.com/console" target="_blank" rel="noreferrer noopener">Usuarios y Registro</a><a href="https://www.mobbex.com/comoseusa/" target="_blank" rel="noreferrer noopener">Cómo se usa?</a><a href="https://www.mobbex.com/contactanos/" target="_blank" rel="noreferrer noopener">Contactanos</a><a href="https://twitter.com/mobbex" target="_blank" rel="noreferrer noopener">Encontranos en Twitter</a></div><div><h5>Más</h5><a href="/blog">Blog</a><a href="https://github.com/mobbexco">GitHub</a></div></section><a href="https://www.mobbex.com" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Mobbex Argentina SRL</section></footer></div><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script></body></html>
